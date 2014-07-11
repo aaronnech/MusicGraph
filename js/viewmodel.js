@@ -25,11 +25,11 @@ function AppViewModel() {
 	};
 
 	self.nodeMouseOver = function(node) {
-		
+
 	};
 
 	self.nodeMouseOut = function(node) {
-		
+
 	};
 
 	self.expandPlayer = function(node, result) {

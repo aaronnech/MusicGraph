@@ -33,7 +33,7 @@ function Playlist() {
     };
 
     self.play = function() {
-        if(songs().length > 0) {
+        if(self.songs().length > 0) {
             self.playing = true;
             self.currentSong = 0;
             self.songs()[self.currentSong].play(self.songEnded);
