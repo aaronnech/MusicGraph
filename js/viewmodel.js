@@ -92,6 +92,13 @@ function AppViewModel() {
 
 	};
 
+	self.slideHideElement = function(elt) {
+		var jq = $(elt);
+		if(jq.is("li")) {
+			jq.slideUp('fast');
+		}
+	};
+
 	self.deletePlaylistSong = function(song) {
 		self.playList.removeSong(song);
 	}

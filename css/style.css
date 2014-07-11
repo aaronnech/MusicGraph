@@ -106,6 +106,10 @@ line.link {
 	position: relative;
 }
 
+.playlist-list li:hover {
+	background: #393c3b;
+}
+
 .playlist-list li .song-name{
 	margin-left: 20px;
 	color: #ecf0f1;
@@ -157,6 +161,7 @@ line.link {
 
 .breadcrumb:hover {
 	cursor: pointer;
+	background: #1a6292;
 }
 
 
@@ -180,6 +185,7 @@ line.link {
 
 .spotify-make-playlist:hover {
 	cursor: pointer;
+	background: #393c3b;
 }
 
 .alert-spotify-incorrect {
