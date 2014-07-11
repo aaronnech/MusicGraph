@@ -36,6 +36,10 @@
 	      </path>
 	    </svg>
 		<div id="app">
+			<div class="breadcrumbs">
+				<button class="breadcrumb artist" data-bind="visible: level() == 'song', click: clickArtistBreadCrumb">Artists</button>
+				<button class="breadcrumb genre" data-bind="visible: level() == 'song' || level() == 'artist', click: clickGenreBreadCrumb">Genre</button>
+			</div>
 			<audio id="audio-player"></audio>
 			<div id="playlist">
 				<img id="imageIcon" src="img/logo.png" id="logo" />
@@ -55,13 +59,7 @@
 		<script type="text/javascript" src="js/init.js"></script>
 		<script type="text/javascript" src="js/d3init.js"></script>
 		<script>
-			['Electronic', 'Rock', 'Pop', 'Country', 'Trance', 'Dubstep', 'Classical', 'R&B', 'Rap', 'Jazz']
-			.map(function(name) {
-				return new Node(vm, new Genre(name, name.toLowerCase()), NODE_TYPES.GENRE);
-			})
-			.forEach(function(node) {
-				vm.addNode(node);
-			});
+			vm.initGenre();
 		</script>
 	</body>
 </html>

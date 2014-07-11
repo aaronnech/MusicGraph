@@ -1,14 +1,21 @@
 function AppViewModel() {
 	var self = this;
 
+	var drilledGenre = null;
+	var drilledArtists = null;
+
 	self.apiService = new MusicAPI();
 
 	self.nodes = new ko.observableArray([]);
 	self.edges = new ko.observableArray([]);
 	self.playList = new Playlist();
 	self.playList.stopWaveform();
+	self.level = new ko.observable('genre');
+
 
 	var makeArtists = function(node, artists) {
+		drilledGenre = node;
+		drilledArtists = artists;
 		self.edges.removeAll();
 		self.nodes.removeAll();
 		var nodes = artists.map(function(artist) {
@@ -19,6 +26,7 @@ function AppViewModel() {
 			self.addEdge(new Edge(node, artistNode));
 			self.addNode(artistNode);
 		});
+		self.level('artist');
 	};
 
 	var makeSongs = function(node, songs) {
@@ -32,6 +40,24 @@ function AppViewModel() {
 			self.addEdge(new Edge(node, songNode));
 			self.addNode(songNode);
 		});
+		self.level('song');
+	};
+
+	var makeGenre = function(genre) {
+		self.edges.removeAll();
+		self.nodes.removeAll();
+		genre
+		.map(function(name) {
+			return new Node(self, new Genre(name, name.toLowerCase()), NODE_TYPES.GENRE);
+		})
+		.forEach(function(node) {
+			self.addNode(node);
+		});
+		self.level('genre');
+	};
+
+	self.initGenre = function() {
+		makeGenre(['Electronic', 'Rock', 'Pop', 'Country', 'Trance', 'Dubstep', 'Classical', 'R&B', 'Rap', 'Jazz']);
 	};
 
 	self.addNode = function(node) {
@@ -67,6 +93,14 @@ function AppViewModel() {
 
 	self.playSong = function(song) {
 		self.playList.playSong(song);
+	};
+
+	self.clickGenreBreadCrumb = function() {
+		self.initGenre();
+	};
+
+	self.clickArtistBreadCrumb = function() {
+		makeArtists(drilledGenre, drilledArtists);
 	};
 
 	self.explore = function(node, result) {
