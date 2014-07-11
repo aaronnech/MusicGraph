@@ -53,7 +53,7 @@ function Playlist(state) {
         if(self.playing) {
             self.currentSong(self.currentSong() + 1);
             if(self.currentSong() < self.songs().length) {
-                self.playSong(self.songs()[self.currentSong()]);x
+                self.playSong(self.songs()[self.currentSong()]);
             } else {
                 self.playing = false;
                 self.stopWaveform();
