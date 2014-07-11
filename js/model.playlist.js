@@ -43,13 +43,13 @@ function Playlist() {
     };
 
     self.stopWaveform = function() {
-        $("#waveOne").attr("dur", "0s");
-        $("#waveTwo").attr("dur", "0s");
+        $("#waveOne").attr("dur", "20s");
+        $("#waveTwo").attr("dur", "25s");
     }
 
     self.startWaveform = function() {
-        $("#waveOne").attr("dur", "5s");
-        $("#waveTwo").attr("dur", "8s");
+        $("#waveOne").attr("dur", "3s");
+        $("#waveTwo").attr("dur", "5s");
     }
 
     // RETURNS THE LENGTH OF THE PLAYLIST
