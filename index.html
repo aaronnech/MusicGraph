@@ -32,12 +32,11 @@
 		<script type="text/javascript" src="js/init.js"></script>
 		<script type="text/javascript" src="js/d3init.js"></script>
 		<script>
-			['Electronic', 'Rock', 'Pop', 'One More']
+			['Electronic', 'Rock', 'Pop', 'Country']
 			.map(function(name) {
-				return new Node(self, name, NODE_TYPES.GENRE);
+				return new Node(vm, new Genre(name, name.toLowerCase()), NODE_TYPES.GENRE);
 			})
 			.forEach(function(node) {
-				console.log(node);
 				vm.addNode(node);
 			});
 		</script>

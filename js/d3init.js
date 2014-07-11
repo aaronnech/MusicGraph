@@ -48,7 +48,7 @@ var updateD3 = function(json) {
       .attr("dy", ".10em")
       .attr("font-weight", "bold")
       .attr("font-family", "Yanone Kaffeesatz")
-      .text(function(d) { return d.dataString; });
+      .text(function(d) { return d.dataString.name; });
 
 	var bbox = text.node().getBBox();
 	var padding = 2;

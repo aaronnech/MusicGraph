@@ -3,6 +3,8 @@ var nodeCounter = 0;
 function Node(vm, dataString, nodeType) {
     var self = this;
 
+    console.log(vm);
+
     self.x = 0;
     self.y = 0;
 
@@ -16,12 +18,12 @@ function Node(vm, dataString, nodeType) {
     self.onClick = function(callback) {
         switch (self.nodeType) {
             case NODE_TYPES.GENRE:
-                vm.apiService.getArtists(self.dataString, function(results) {
+                self.vm.apiService.getArtists(self.dataString, function(results) {
                     callback(self, results);
                 });
                 break;
             case NODE_TYPES.ARTIST:
-                vm.apiService.getArtistTopTracks(dataString.id, function(results) {
+                self.vm.apiService.getArtistTopTracks(dataString.id, function(results) {
                     callback(self, results);
                 });
                 break;
