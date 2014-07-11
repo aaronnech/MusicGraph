@@ -32,7 +32,8 @@ var updateD3 = function(json) {
 	// Create the groups under svg
 	var gnodes = svg.selectAll('g.gnode')
 	  .data(json.nodes)
-	var enteredGNode = gnodes.enter().insert('g')
+	  .moveToFront();
+	var enteredGNode = gnodes.enter().append('g')
 	  .attr("class", "gnode")
 	  .call(force.drag);
     gnodes.exit().remove();
@@ -45,7 +46,17 @@ var updateD3 = function(json) {
 	var text = enteredGNode.insert('text')
       .attr("dx", ".10em")
       .attr("dy", ".10em")
-      .text(function(d) { return d.dataString });
+      .attr("font-weight", "bold")
+      .attr("font-family", "Yanone Kaffeesatz")
+      .text(function(d) { return d.dataString; });
+
+	var bbox = text.node().getBBox();
+	var padding = 2;
+	var rect = enteredGNode.insert("rect", "text")
+	    .attr("x", bbox.x - padding)
+	    .attr("y", bbox.y - padding)
+	    .attr("width", bbox.width + (padding*2))
+	    .attr("height", bbox.height + (padding*2));
 
 
 	// attach events
@@ -63,16 +74,13 @@ var updateD3 = function(json) {
 
 	enteredGNode.on('click', vm.clickNode);
 	enteredGNode.on('mouseover', function(d) {
-		link.style('stroke', function(l) {
-			if (d === l.source || d === l.target)
-				return '#ecf0f1';
-			else
-				return '#e67e22';
-		});
+		svg.selectAll('text').attr("class", "activated");
+		svg.selectAll('rect').attr("class", "activated");
 		vm.nodeMouseOver(d);
 	});
 	enteredGNode.on('mouseout', function(d) {
-		link.style('stroke', '#e67e22');
+		svg.selectAll('text').attr("class", "");
+		svg.selectAll('rect').attr("class", "");
 		vm.nodeMouseOut(d);
 	});
 

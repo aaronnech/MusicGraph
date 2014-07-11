@@ -33,6 +33,22 @@ circle.node:hover {
 	fill: #ecf0f1;
 }
 
+text {
+	fill: #ecf0f1;
+}
+
+text.activated {
+	fill: #2a2c2b;
+}
+
+rect {
+	fill: #2a2c2b;
+}
+
+rect.activated {
+	fill: #ecf0f1;
+}
+
 line.link {
 	stroke-width: 3px;
 	stroke: #e67e22;
