@@ -11,7 +11,10 @@ function Song(track) {
 			soundHandle.setAttribute('loop', loop);
 		soundHandle.play();
 		soundHandle.addEventListener('ended', ended, false);
-	};
+	}
+
+	var self = this;
+	
 
 	var PLAYER_ID = 'audio-player';
 
