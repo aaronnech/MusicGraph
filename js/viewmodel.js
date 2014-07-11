@@ -1,15 +1,12 @@
 function AppViewModel() {
 	var self = this;
 
-	self.apiService = null;
+	self.apiService = new MusicAPI();
 
 	self.nodes = new ko.observableArray([]);
 	self.edges = new ko.observableArray([]);
 
 	self.addNode = function(node) {
-		for (var i = 0; i < self.nodes().length; i++) {
-			self.edges.push(new Edge(node, self.nodes()[i]));
-		}
 		self.nodes.push(node);
 	};
 

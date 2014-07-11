@@ -8,7 +8,7 @@ d3.selection.prototype.moveToFront = function() {
 };
 
 var force = d3.layout.force()
-    .charge(-120)
+    .charge(-350)
     .linkDistance(200)
     .size([width, height]);
 
