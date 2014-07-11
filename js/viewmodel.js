@@ -5,6 +5,7 @@ function AppViewModel() {
 
 	self.nodes = new ko.observableArray([]);
 	self.edges = new ko.observableArray([]);
+	self.playList = new Playlist();
 
 	var makeArtists = function(node, artists) {
 		self.edges.removeAll();
@@ -56,7 +57,12 @@ function AppViewModel() {
 
 	};
 
+	self.deletePlaylistSong = function(song) {
+		self.playList.removeSong(song);
+	}
+
 	self.playSong = function(song) {
+		self.playList.addSong(song);
 		song.play();
 	};
 

@@ -23,8 +23,9 @@
 			<div id="playlist">
 				<img src="img/logo.png" id="logo" />
 				<h2>Playlist</h2>
-				<li>
-				</li>
+				<ul class="playlist-list" data-bind="foreach: playList.songs">
+					<li><span data-bind="text: name"></span><a href="#" data-bind="click: $root.deletePlaylistSong">X</a></li>
+				</ul>
 			</div>
 			<div id="interactive-pane">
 			</div>
