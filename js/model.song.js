@@ -17,9 +17,7 @@ function Song(track) {
 				ended();
 			}, false);
 		$("audio").animate({volume: 1.0}, 1000);
-	}
-
-	var self = this;
+	};
 
 	var PLAYER_ID = 'audio-player';
 

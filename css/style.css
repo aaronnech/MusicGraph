@@ -135,4 +135,18 @@ line.link {
 .breadcrumbs {
 	display: block;
 	float: right;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+.breadcrumb {
+	background: #3498db;
+	border: none;
+	padding: 10px;
+	font-weight: bold;
+	color: #ecf0f1;
+}
+
+.breadcrumb:hover {
+	cursor: pointer;
 }
