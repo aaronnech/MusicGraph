@@ -16,19 +16,19 @@ function Node(vm, dataString, nodeType) {
     self.onClick = function(callback) {
         switch (self.nodeType) {
             case NODE_TYPES.GENRE:
-                // HANDLE GENRE
-                console.log("You clicked GENRE bitch.");
+                vm.apiService.getArtists(self.dataString, function(results) {
+                    callback(self, results);
+                });
                 break;
             case NODE_TYPES.ARTIST:
-                // HANDLE ARTIST
-                console.log("You clicked ARTIST bitch.");
+                vm.apiService.getArtistTopTracks(dataString.id, function(results) {
+                    callback(self, results);
+                });
                 break;
             case NODE_TYPES.SONG:
-                // HANDLE SONG
-                console.log("You clicked SONG bitch.");
+                callback(self, self.dataString);
                 break;
         }
-        // callback(self, {RESULT});
     };
 
     self.toD3 = ko.computed(function() {
