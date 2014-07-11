@@ -9,20 +9,36 @@ var genreList = ['rock'];
 var fullGenreList = [];
 var player;
 
+function showGenre(genreName) {
+    console.log('showing genre', genreName);
+    curGenre = genreName;
+    var title = genreName;
+    selectGenre(curGenre);
+    loadSimilarGenres(genreName);
+    loadTopArtists(genreName);
+    loadTopSongs(genreName, 'core-best');
+}
 
-function loadGenreList() {
+function loadGenre() {
     var url = "http://developer.echonest.com/api/v4/genre/list";
     $.getJSON(url, {api_key:apiKey, results:2000, bucket:[]}, function(data) {
-           genreList = data.response.genres;
-           allGenres[genre.name] = genre;
+                genreList = data.response.genres;
+            each(data.response.genres, function(genre, i) {
+            genre.which = i;
+            allGenres[genre.name] = genre;
+            allGenres[genre.name] = genre;
            fullGenreList.push(genre);
     });
+});
+}
+
+function selectGenre(name) {
+    $('#genre').val(name);
+    $('#genre').trigger("liszt:updated");
 }
 
 
-
 function loadTopArtists(genreName) {
-    var url = host + 'genre/artists'
     $.getJSON(url, {api_key:apiKey, name:genreName },
         function(data) {
             var artists = data.response.artists;
