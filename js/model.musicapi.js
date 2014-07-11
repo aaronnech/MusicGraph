@@ -1,19 +1,19 @@
-function MusicAPI(token, username) {
+function MusicAPI(token) {
     var self = this;
 
     var accessToken = token || '';
 
     var CLIENT_ID = '510822911bb745649354e6784b47de76';
-    var REDIRECT_URL = 'http://www.musicgraph.in/index.html';
+    var REDIRECT_URL = 'http://musicgraph.in/index.html';
 
-    var login = function(action) {
+    var login = function(action, value) {
         var url = 'https://accounts.spotify.com/authorize?client_id=' + CLIENT_ID +
             '&response_type=token' +
             '&scope=playlist-read-private%20playlist-modify%20playlist-modify-private' +
             '&redirect_uri=' + encodeURIComponent(REDIRECT_URL);
         if(action)
-            localStorage.setItem(action, 'SET');
-        var w = window.open(url, 'Spotify Login', 'WIDTH=400,HEIGHT=500');
+            localStorage.setItem(action, value);
+        window.location(url);
     };
 
     self.getUsername = function(callback) {
@@ -30,7 +30,11 @@ function MusicAPI(token, username) {
                 callback(null);
             }
         });
-    }
+    };
+
+    self.setToken = function(newToken) {
+        accessToken = newToken;
+    };
 
     self.createPlaylist = function(username, name, callback) {
         var url = 'https://api.spotify.com/v1/users/' + username +
@@ -87,7 +91,7 @@ function MusicAPI(token, username) {
                 });
             });
         } else {
-            login();
+            login('make-playlist', name);
         }
     };
 

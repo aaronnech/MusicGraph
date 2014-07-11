@@ -9,6 +9,7 @@ function AppViewModel() {
 	self.nodes = new ko.observableArray([]);
 	self.edges = new ko.observableArray([]);
 	self.state = new State();
+	self.state.doLocalActions(self);
 	self.playList = new Playlist(self.state);
 	self.playList.stopWaveform();
 	self.level = new ko.observable('genre');
@@ -55,6 +56,10 @@ function AppViewModel() {
 			self.addNode(node);
 		});
 		self.level('genre');
+	};
+
+	self.setAccessToken = function(token) {
+		self.apiService.setToken(token);
 	};
 
 	self.initGenre = function() {
