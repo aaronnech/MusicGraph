@@ -27,9 +27,6 @@ function Node(vm, dataString, nodeType) {
                 // HANDLE SONG
                 console.log("You clicked SONG bitch.");
                 break;
-            default:
-                // NEEDED?
-                console.log("Give me a Type!");
         }
         // callback(self, {RESULT});
     };
