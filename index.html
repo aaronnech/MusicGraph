@@ -38,6 +38,12 @@
 	      </path>
 	    </svg>
 		<div id="app">
+			<div class="alert-spotify-correct">
+				<p>Spotify playlist saved successfully.</p>
+			</div>
+			<div class="alert-spotify-incorrect">
+				<p>Spotify playlist not saved.. Sorry!</p>
+			</div>
 			<div class="breadcrumbs">
 				<button class="breadcrumb artist" data-bind="visible: level() == 'song', click: clickArtistBreadCrumb">Artists</button>
 				<button class="breadcrumb genre" data-bind="visible: level() == 'song' || level() == 'artist', click: clickGenreBreadCrumb">Genre</button>

@@ -181,3 +181,23 @@ line.link {
 .spotify-make-playlist:hover {
 	cursor: pointer;
 }
+
+.alert-spotify-incorrect {
+	padding: 50px;
+	position: absolute;
+	z-index: 500;
+	top: 10;
+	left: 20%;
+	background: #3498db;
+	display: none;
+}
+
+.alert-spotify-correct {
+	padding: 50px;
+	position: absolute;
+	z-index: 500;
+	top: 10;
+	left: 20%;
+	background: #3498db;
+	display: none;
+}

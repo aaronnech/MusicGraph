@@ -13,7 +13,7 @@ function MusicAPI(token) {
             '&redirect_uri=' + encodeURIComponent(REDIRECT_URL);
         if(action)
             localStorage.setItem(action, value);
-        window.location(url);
+        window.location = url;
     };
 
     self.getUsername = function(callback) {
@@ -68,7 +68,7 @@ function MusicAPI(token) {
             data: JSON.stringify(tracks),
             dataType: 'json',
             headers: {
-                'Authorization': 'Bearer ' + g_access_token,
+                'Authorization': 'Bearer ' + accessToken,
                 'Content-Type': 'application/json'
             },
             success: function(r) {
@@ -86,7 +86,7 @@ function MusicAPI(token) {
             self.getUsername(function(username) {
                 self.createPlaylist(username, name, function(playlistHandle) {
                     self.addTracksToPlaylist(username, playlistHandle, playList.getTracks(), function() {
-                        console.log('DONE!');
+                        $('.alert-spotify-correct').fadeIn('slow').delay(500).fadeOut('slow');
                     });
                 });
             });
