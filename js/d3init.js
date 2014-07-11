@@ -8,8 +8,8 @@ d3.selection.prototype.moveToFront = function() {
 };
 
 var force = d3.layout.force()
-    .charge(-350)
-    .linkDistance(200)
+    .charge(-500)
+    .linkDistance(250)
     .size([width, height]);
 
 var svg = d3.select("#interactive-pane").append("svg")
@@ -40,8 +40,22 @@ var updateD3 = function(json) {
 
 	// Add one circle in each group
 	var node = enteredGNode.insert("circle")
-	  .attr("class", "node")
-	  .attr("r", 30);
+	  .attr("class", function(d) {
+        var resultClass;
+        switch (d.nodeType) {
+            case NODE_TYPES.GENRE:
+                resultClass = "genreNode";
+                break;
+            case NODE_TYPES.ARTIST:
+                resultClass = "artistNode";
+                break;
+            case NODE_TYPES.SONG:
+                resultClass = "songNode";
+                break;
+        }
+        return "node " + resultClass;
+        })
+	.attr("r", 30);
 
 	var text = enteredGNode.insert('text')
       .attr("dx", ".10em")
@@ -68,20 +82,20 @@ var updateD3 = function(json) {
 		    .attr("y2", function(d) { return d.target.y; });
 
 		// Translate the groups
-	    gnodes.attr("transform", function(d) { 
-		   return 'translate(' + [d.x, d.y] + ')'; 
-		});    
+	    gnodes.attr("transform", function(d) {
+		   return 'translate(' + [d.x, d.y] + ')';
+		});
 	});
 
 	enteredGNode.on('click', vm.clickNode);
 	enteredGNode.on('mouseover', function(d) {
-		svg.selectAll('text').attr("class", "activated");
-		svg.selectAll('rect').attr("class", "activated");
+		// d3.select(this).selectAll("text").attr("class", "activated");
+		d3.select(this).selectAll("node").attr("class", "activated");
 		vm.nodeMouseOver(d);
 	});
 	enteredGNode.on('mouseout', function(d) {
-		svg.selectAll('text').attr("class", "");
-		svg.selectAll('rect').attr("class", "");
+		// d3.select(this).selectAll("text").attr("class", "");
+		d3.select(this).selectAll("node").attr("class", "");
 		vm.nodeMouseOut(d);
 	});
 
