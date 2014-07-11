@@ -23,9 +23,18 @@ function Playlist(state) {
         return results;
     };
 
+    self.findSong = function(song) {
+        for(var i = 0; i < self.songs().length; i++) {
+            if(self.songs()[i] === song ||
+                self.songs()[i].fullName === song.fullName)
+                return i;
+        }
+        return -1;
+    };
+
     // ADD A SONG TO THE END OF THE PLAYLIST
     self.addSong = function(song) {
-        if(self.songs.indexOf(song) === -1) {
+        if(self.findSong(song) === -1) {
             self.songs.push(song);
             self.state.saveSongs(self);
         }
@@ -33,7 +42,7 @@ function Playlist(state) {
 
     // REMOVE A SONG FROM THE PLAYLIST
     self.removeSong = function(song) {
-        var index = self.songs.indexOf(song);
+        var index = self.findSong(song);
         if (index > -1) {
             self.songs.splice(index, 1);
             self.state.saveSongs(self);
@@ -65,7 +74,7 @@ function Playlist(state) {
         if(self.songs().length > 0) {
             setSongsNotPlaying();
             self.playing = true;
-            self.currentSong(self.songs.indexOf(song));
+            self.currentSong(self.findSong(song));
             self.startWaveform();
 
             var soundHandle = document.getElementById(PLAYER_ID);
