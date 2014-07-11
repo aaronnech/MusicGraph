@@ -26,6 +26,7 @@ function Song(track) {
 
 	var self = this;
 
+	self.track = track;
 	self.name = track.name;
 	self.fullName = track.name + ' - ' + track.artists[0].name;
 	self.url = track.preview_url;
