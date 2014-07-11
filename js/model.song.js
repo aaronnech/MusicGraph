@@ -3,7 +3,7 @@ function Song(track) {
 
 	var startSound = function(id, url, ended, loop) {
 		soundHandle = document.getElementById(id);
-		var newSoundHandle = old_element.cloneNode(true);
+		var newSoundHandle = soundHandle.cloneNode(true);
 		soundHandle.parentNode.replaceChild(newSoundHandle, soundHandle);
 		soundHandle = newSoundHandle;
 		soundHandle.setAttribute('src', url);
