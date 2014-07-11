@@ -19,8 +19,14 @@ function AppViewModel() {
 		});
 	};
 
-	var makeSongs = function(songs) {
-
+	var makeSongs = function(node, songs) {
+		var nodes = songs.map(function(song) {
+			return new Node(self, song, NODE_TYPES.SONG);
+		});
+		nodes.forEach(function(songNode) {
+			self.addEdge(new Edge(node, songNode));
+			self.addNode(songNode);
+		});
 	};
 
 	self.addNode = function(node) {
