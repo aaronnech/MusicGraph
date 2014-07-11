@@ -40,7 +40,7 @@
 				<img src="img/logo.png" id="logo" />
 				<h2>Playlist</h2>
 				<ul class="playlist-list" data-bind="foreach: playList.songs">
-					<li><span data-bind="text: name"></span><a href="#" data-bind="click: $root.deletePlaylistSong">X</a></li>
+					<li><span data-bind="text: name"></span><a class="x-button" href="#" data-bind="click: $root.deletePlaylistSong">X</a></li>
 				</ul>
 			</div>
 			<div id="interactive-pane">
