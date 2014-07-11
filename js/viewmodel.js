@@ -62,7 +62,7 @@ function AppViewModel() {
 	};
 
 	self.initGenre = function() {
-		makeGenre(['Electronic', 'Rock', 'Pop', 'Metal', 'Trance', 'Dubstep', 'Classical', 'R&B', 'Rap', 'Jazz']);
+		makeGenre(['Electronic', 'Rock', 'Pop', 'Metal', 'Trance', 'Dubstep', 'Classical', 'R&B', 'Rap', 'Jazz', 'Christmas']);
 	};
 
 	self.addNode = function(node) {
