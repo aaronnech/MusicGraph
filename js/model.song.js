@@ -10,7 +10,8 @@ function Song(track) {
 		if(loop)
 			soundHandle.setAttribute('loop', loop);
 		soundHandle.play();
-		soundHandle.addEventListener('ended', ended, false);
+		if(typeof ended !== 'undefined')
+			soundHandle.addEventListener('ended', ended, false);
 	}
 
 	var self = this;

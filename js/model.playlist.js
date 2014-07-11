@@ -1,7 +1,6 @@
-function Playlist(vm) {
+function Playlist() {
     var self = this;
 
-    self.vm = vm;
     self.songs = new ko.observableArray([]);
     self.currentSong = -1;
     self.playing = false;
