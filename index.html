@@ -38,10 +38,11 @@
 			<audio id="audio-player"></audio>
 			<div id="playlist">
 				<img id="imageIcon" src="img/logo.png" id="logo" />
-				<h2 id="playlistTitle">Playlist</h2>
+				<h2 id="playlistTitle" data-bind="visible: playList.songs().length > 0">Playlist</h2>
 				<ul class="playlist-list" data-bind="foreach: playList.songs">
 					<li>
 						<a class="song-name" href="#" data-bind="text: name, click: $root.playSong"></a>
+						<span data-bind="visible: isPlaying()" class="play-icon">▶</span>
 						<a class="x-button" href="#" data-bind="click: $root.deletePlaylistSong">X</a>
 					</li>
 				</ul>

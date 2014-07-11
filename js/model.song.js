@@ -11,7 +11,10 @@ function Song(track) {
 			soundHandle.setAttribute('loop', loop);
 		soundHandle.play();
 		if(typeof ended !== 'undefined')
-			soundHandle.addEventListener('ended', ended, false);
+			soundHandle.addEventListener('ended', function() {
+				self.isPlaying(false);
+				ended();
+			}, false);
 	}
 
 	var self = this;
@@ -20,8 +23,10 @@ function Song(track) {
 
 	self.name = track.name;
 	self.url = track.preview_url;
+	self.isPlaying = new ko.observable(false);
 
 	self.play = function(ended) {
+		self.isPlaying(true);
 		startSound(PLAYER_ID, self.url, ended, false);
 	}
 }

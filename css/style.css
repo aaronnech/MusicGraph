@@ -109,6 +109,14 @@ line.link {
 	text-decoration: none;
 }
 
+
+.playlist-list li .play-icon {
+	color: #ecf0f1;
+	float: right;
+	margin-right: 10px;
+	font-size: 1.2em;
+}
+
 .playlist-list li .x-button {
 	color: #ecf0f1;
 	text-decoration: none;
