@@ -51,6 +51,12 @@ function Playlist() {
             self.playing = true;
             self.startWaveform();
             self.songs()[self.currentSong()].play(self.songEnded);
+
+            $("audio").animate({volume: 0}, 0);
+            $("audio").animate({volume: 1.0}, 500);
+            setTimeout(function() {
+                $("audio").animate({volume: 0}, 1000);
+            }, 29500);
         }
     };
 

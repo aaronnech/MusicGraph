@@ -6,6 +6,7 @@ function AppViewModel() {
 	self.nodes = new ko.observableArray([]);
 	self.edges = new ko.observableArray([]);
 	self.playList = new Playlist();
+	self.playList.stopWaveform();
 
 	var makeArtists = function(node, artists) {
 		self.edges.removeAll();
