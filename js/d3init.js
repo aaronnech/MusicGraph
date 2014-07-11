@@ -50,14 +50,15 @@ var updateD3 = function(json) {
       .attr("font-family", "Yanone Kaffeesatz")
       .text(function(d) { return d.dataString.name; });
 
-	var bbox = text.node().getBBox();
-	var padding = 2;
-	var rect = enteredGNode.insert("rect", "text")
-	    .attr("x", bbox.x - padding)
-	    .attr("y", bbox.y - padding)
-	    .attr("width", bbox.width + (padding*2))
-	    .attr("height", bbox.height + (padding*2));
-
+    if(text.node()) {
+		var bbox = text.node().getBBox();
+		var padding = 2;
+		var rect = enteredGNode.insert("rect", "text")
+		    .attr("x", bbox.x - padding)
+		    .attr("y", bbox.y - padding)
+		    .attr("width", bbox.width + (padding*2))
+		    .attr("height", bbox.height + (padding*2));
+    }
 
 	// attach events
 	force.on("tick", function() {

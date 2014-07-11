@@ -4,7 +4,7 @@ function MusicAPI() {
     self.getArtists = function(genreName, callback) {
         var url = 'https://developer.echonest.com/api/v4/genre/artists';
         var apiKey = 'YTBBANYZHICTAFW2P';
-        var numberOfResults = 10;
+        var numberOfResults = 15;
 
         $.getJSON(url, {api_key : apiKey, results : numberOfResults, name : genreName},
             function(data) {

@@ -55,7 +55,7 @@ function AppViewModel() {
 	};
 
 	self.explore = function(node, result) {
-        switch (self.nodeType) {
+        switch (node.nodeType) {
             case NODE_TYPES.GENRE:
                 makeArtists(node, result);
                 break;
