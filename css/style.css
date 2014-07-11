@@ -77,13 +77,19 @@ line.link {
 	margin-top: 5px;
 	width: 100%;
 	height: 17px;
-	padding: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 	font-weight: bold;
+}
+
+.playlist-list li .song-name{
+	margin-left: 20px;
 }
 
 .playlist-list li .x-button {
 	color: #ecf0f1;
 	text-decoration: none;
 	float: right;
+	margin-right: 10px;
 	font-size: 1.2em;
 }
