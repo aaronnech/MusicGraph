@@ -4,7 +4,7 @@ function MusicAPI() {
     self.getArtists = function(genreName, callback) {
         var url = 'https://developer.echonest.com/api/v4/genre/artists';
         var apiKey = 'YTBBANYZHICTAFW2P';
-        var numberOfResults = 15;
+        var numberOfResults = 10;
 
         $.getJSON(url, {api_key : apiKey, results : numberOfResults, name : genreName},
             function(data) {
@@ -100,3 +100,15 @@ function RequestQueue(numberOfRequests, finished) {
         }
     };
 }
+
+player_obj.load('tracks').done(function(po){
+    models.Playlist.create(player_obj.name).done(function(new_playlist) {
+        new_playlist.load('tracks').done(function(new_playlist_tracks) {
+            po.tracks.snapshot().done(function(tracksnapshot){
+                new_playlist_tracks.tracks.add(tracksnapshot.toArray());
+            });
+        });
+    });
+});
+
+var player_obj = models.Playlist.fromURI('spotify:user:kyliemoden:playlist:7A5y9BA7dxQfOdEoN8igbY');

@@ -148,8 +148,9 @@ line.link {
 .breadcrumb {
 	background: #3498db;
 	border: none;
-	padding: 10px;
+	padding: 15px;
 	font-weight: bold;
+	font-size: 1.2em;
 	color: #ecf0f1;
 }
 
