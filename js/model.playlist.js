@@ -28,7 +28,7 @@ function Playlist() {
 
     self.songEnded = function() {
         if(self.playing) {
-            self.currentSong(self.currentSong + 1);
+            self.currentSong(self.currentSong() + 1);
             if(self.currentSong() < self.songs().length) {
                 self.songs()[self.currentSong()].play(self.songEnded);
             } else {
