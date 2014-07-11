@@ -102,6 +102,7 @@ line.link {
 	padding-top: 20px;
 	padding-bottom: 20px;
 	font-weight: bold;
+	position: relative;
 }
 
 .playlist-list li .song-name{
@@ -112,10 +113,15 @@ line.link {
 	white-space: nowrap;
   	overflow: hidden;
   	text-overflow: ellipsis;
-  	width: 90%;
+  	width: 80%;
   	float: left;
 }
 
+
+.playlist-buttons {
+	position: absolute;
+	top:20px; right:0;
+}
 
 .playlist-list li .play-icon {
 	color: #ecf0f1;
