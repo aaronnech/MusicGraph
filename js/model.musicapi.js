@@ -1,5 +1,95 @@
-function MusicAPI() {
+function MusicAPI(token, username) {
     var self = this;
+
+    var accessToken = token || '';
+
+    var CLIENT_ID = '510822911bb745649354e6784b47de76';
+    var REDIRECT_URL = 'http://www.musicgraph.in/index.html';
+
+    var login = function(action) {
+        var url = 'https://accounts.spotify.com/authorize?client_id=' + CLIENT_ID +
+            '&response_type=token' +
+            '&scope=playlist-read-private%20playlist-modify%20playlist-modify-private' +
+            '&redirect_uri=' + encodeURIComponent(REDIRECT_URL);
+        if(action)
+            localStorage.setItem(action, 'SET');
+        var w = window.open(url, 'Spotify Login', 'WIDTH=400,HEIGHT=500');
+    };
+
+    self.getUsername = function(callback) {
+        var url = 'https://api.spotify.com/v1/me';
+        $.ajax(url, {
+            dataType: 'json',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function(r) {
+                callback(r.id);
+            },
+            error: function(r) {
+                callback(null);
+            }
+        });
+    }
+
+    self.createPlaylist = function(username, name, callback) {
+        var url = 'https://api.spotify.com/v1/users/' + username +
+            '/playlists';
+        $.ajax(url, {
+            method: 'POST',
+            data: JSON.stringify({
+                'name': name,
+                'public': false
+            }),
+            dataType: 'json',
+            headers: {
+                'Authorization': 'Bearer ' + accessToken,
+                'Content-Type': 'application/json'
+            },
+            success: function(r) {
+                callback(r.id);
+            },
+            error: function(r) {
+                callback(null);
+            }
+        });
+    }
+
+    self.addTracksToPlaylist = function(username, playlist, tracks, callback) {
+        var url = 'https://api.spotify.com/v1/users/' + username +
+            '/playlists/' + playlist +
+            '/tracks'; // ?uris='+encodeURIComponent(tracks.join(','));
+        $.ajax(url, {
+            method: 'POST',
+            data: JSON.stringify(tracks),
+            dataType: 'json',
+            headers: {
+                'Authorization': 'Bearer ' + g_access_token,
+                'Content-Type': 'application/json'
+            },
+            success: function(r) {
+                console.log('add track response', r);
+                callback(r.id);
+            },
+            error: function(r) {
+                callback(null);
+            }
+        });
+    }
+
+    self.makePlaylist = function(playList, name) {
+        if(accessToken) {
+            self.getUsername(function(username) {
+                self.createPlaylist(username, name, function(playlistHandle) {
+                    self.addTracksToPlaylist(username, playlistHandle, playList.getTracks(), function() {
+                        console.log('DONE!');
+                    });
+                });
+            });
+        } else {
+            login();
+        }
+    };
 
     self.getArtists = function(genreName, callback) {
         var url = 'https://developer.echonest.com/api/v4/genre/artists';

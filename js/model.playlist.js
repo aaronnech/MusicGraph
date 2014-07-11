@@ -16,6 +16,11 @@ function Playlist() {
         }
     };
 
+    self.getTracks = function() {
+
+        //TODO
+    };
+
     // ADD A SONG TO THE END OF THE PLAYLIST
     self.addSong = function(song) {
         if(self.songs.indexOf(song) === -1) {

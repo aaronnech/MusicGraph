@@ -104,7 +104,7 @@ function AppViewModel() {
 	};
 
 	self.makePlaylist = function() {
-
+		self.apiService.makePlaylist(self.playList, 'MusicGraph Play List');
 	};
 
 	self.explore = function(node, result) {
