@@ -190,15 +190,3 @@ function RequestQueue(numberOfRequests, finished) {
         }
     };
 }
-
-player_obj.load('tracks').done(function(po){
-    models.Playlist.create(player_obj.name).done(function(new_playlist) {
-        new_playlist.load('tracks').done(function(new_playlist_tracks) {
-            po.tracks.snapshot().done(function(tracksnapshot){
-                new_playlist_tracks.tracks.add(tracksnapshot.toArray());
-            });
-        });
-    });
-});
-
-var player_obj = models.Playlist.fromURI('spotify:user:kyliemoden:playlist:7A5y9BA7dxQfOdEoN8igbY');

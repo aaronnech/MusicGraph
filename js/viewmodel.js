@@ -8,7 +8,8 @@ function AppViewModel() {
 
 	self.nodes = new ko.observableArray([]);
 	self.edges = new ko.observableArray([]);
-	self.playList = new Playlist();
+	self.state = new State();
+	self.playList = new Playlist(self.state);
 	self.playList.stopWaveform();
 	self.level = new ko.observable('genre');
 

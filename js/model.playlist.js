@@ -1,11 +1,10 @@
-function Playlist() {
+function Playlist(state) {
     var self = this;
-
+    self.state = state;
     self.songs = new ko.observableArray([]);
-    // if(localStorage.getItem("playlist")) {
-    //     console.log(JSON.parse(localStorage.getItem("playlist")));
-    //     self.songs(JSON.parse(localStorage.getItem("playlist")));
-    // }
+    if(self.state.isSaved()) {
+        self.state.restoreSongs(self);
+    }
     self.currentSong = new ko.observable(-1);
     self.playing = false;
 
@@ -25,7 +24,7 @@ function Playlist() {
     self.addSong = function(song) {
         if(self.songs.indexOf(song) === -1) {
             self.songs.push(song);
-            //localStorage.setItem("playlist", JSON.stringify(self.songs()));
+            self.state.saveSongs(self);
         }
     };
 
@@ -34,7 +33,7 @@ function Playlist() {
         var index = self.songs.indexOf(song);
         if (index > -1) {
             self.songs.splice(index, 1);
-            //localStorage.setItem("playlist", JSON.stringify(self.songs()));
+            self.state.saveSongs(self);
         }
     };
 
