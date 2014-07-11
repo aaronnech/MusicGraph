@@ -2,6 +2,8 @@ body {
 	background: #34495e;
 	color: #ecf0f1;
 	font-family: 'Yanone Kaffeesatz', sans-serif;
+	margin: 0;
+	padding: 0;
 }
 
 #app {
@@ -9,14 +11,14 @@ body {
 }
 
 #playlist {
-	width: 33%;
+	width: 20%;
 	float: left;
 }
 
 #interactive-pane {
-	width: 64%;
+	width: 80%;
 	float: right;
-	height: 800px;
+	height: 100%;
 }
 
 #audio-player {

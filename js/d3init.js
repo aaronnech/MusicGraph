@@ -10,11 +10,11 @@ d3.selection.prototype.moveToFront = function() {
 var force = d3.layout.force()
     .charge(-120)
     .linkDistance(200)
-    .size([width, height])
+    .size([width, height]);
 
 var svg = d3.select("#interactive-pane").append("svg")
-    .attr("width", width)
-    .attr("height", height);
+    .attr("viewBox", "0 0 " + width + " " + height)
+    .attr("preserveAspectRatio", "xMidYMid meet");
 
 
 var updateD3 = function(json) {
@@ -29,17 +29,24 @@ var updateD3 = function(json) {
 	  .attr("class", "link");
 	link.exit().remove();
 
-	var node = svg.selectAll("circle.node")
-	  .data(json.nodes, function(d) { return d.id(); });
-	node.enter().append("circle")
-	  .attr("class", "node")
-	  .attr("r", 30)
-	  .moveToFront()
+	// Create the groups under svg
+	var gnodes = svg.selectAll('g.gnode')
+	  .data(json.nodes)
+	var enteredGNode = gnodes.enter().insert('g')
+	  .attr("class", "gnode")
 	  .call(force.drag);
-	node.exit().remove();
+    gnodes.exit().remove();
 
-	node.append("title")
-	  .text(function(d) { return d.id(); });
+	// Add one circle in each group
+	var node = enteredGNode.insert("circle")
+	  .attr("class", "node")
+	  .attr("r", 30);
+
+	var text = enteredGNode.insert('text')
+      .attr("dx", ".10em")
+      .attr("dy", ".10em")
+      .text(function(d) { return d.dataString });
+
 
 	// attach events
 	force.on("tick", function() {
@@ -48,12 +55,14 @@ var updateD3 = function(json) {
 		    .attr("x2", function(d) { return d.target.x; })
 		    .attr("y2", function(d) { return d.target.y; });
 
-		node.attr("cx", function(d) { return d.x; })
-		    .attr("cy", function(d) { return d.y; });
+		// Translate the groups
+	    gnodes.attr("transform", function(d) { 
+		   return 'translate(' + [d.x, d.y] + ')'; 
+		});    
 	});
 
-	node.on('click', vm.clickNode);
-	node.on('mouseover', function(d) {
+	enteredGNode.on('click', vm.clickNode);
+	enteredGNode.on('mouseover', function(d) {
 		link.style('stroke', function(l) {
 			if (d === l.source || d === l.target)
 				return '#ecf0f1';
@@ -62,7 +71,7 @@ var updateD3 = function(json) {
 		});
 		vm.nodeMouseOver(d);
 	});
-	node.on('mouseout', function(d) {
+	enteredGNode.on('mouseout', function(d) {
 		link.style('stroke', '#e67e22');
 		vm.nodeMouseOut(d);
 	});

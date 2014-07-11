@@ -31,5 +31,15 @@
 		</div>
 		<script type="text/javascript" src="js/init.js"></script>
 		<script type="text/javascript" src="js/d3init.js"></script>
+		<script>
+			['Electronic', 'Rock', 'Pop', 'One More']
+			.map(function(name) {
+				return new Node(self, name, NODE_TYPES.GENRE);
+			})
+			.forEach(function(node) {
+				console.log(node);
+				vm.addNode(node);
+			});
+		</script>
 	</body>
 </html>
