@@ -1,30 +1,68 @@
-var drag = d3.behavior.drag()
-    .origin(Object)
-    .on("drag", function (d) {
-    	// Update the view model
-    	d.position.x(parseInt(d.position.x()) + d3.event.dx);
-		d.position.y(parseInt(d.position.y()) + d3.event.dy);
-		});
+var width = 800;
+var height = 600;
 
-var updateD3 = function(data) {
-    var nodes = d3.select("#buffer")
-        .selectAll("circle")
-        .data(data, function (d) { return d.name(); });
+var force = d3.layout.force()
+    .charge(-120)
+    .linkDistance(100)
+    .size([width, height])
 
-
-    nodes.enter()
-        .append("rect")
-        .attr("id", function (d) { return d.name(); })
-        .attr("opacity", 0.0)
-        .transition()
-        .duration(1000)
-        .attr("opacity", 0.5);
+var svg = d3.select("#interactive-pane").append("svg")
+    .attr("width", width)
+    .attr("height", height);
 
 
-    nodes.attr("x", function (d) { return d.position.x(); })
-        .attr("y", function (d) { return d.position.y(); })
-        .attr("width", function (d) { return 20; })
-        .attr("height", function (d) { return 20; })
-        .call(drag);
-    nodes.exit().remove();
+var updateD3 = function(json) {
+	force
+	  .nodes(json.nodes)
+	  .links(json.links)
+	  .start();
+
+	var link = svg.selectAll("line.link")
+	  .data(json.links, function(d) { return d.source.id() + '-' + d.target.id(); });
+	link.enter().append("line")
+	  .attr("class", "link");
+	link.exit().remove();
+
+	var node = svg.selectAll("circle.node")
+	  .data(json.nodes, function(d) { return d.id(); });
+	node.enter().append("circle")
+	  .attr("class", "node")
+	  .attr("r", 100)
+	  .call(force.drag);
+	node.exit().remove();
+
+	node.append("title")
+	  .text(function(d) { return d.id(); });
+
+	// attach events
+	force.on("tick", function() {
+		link.attr("x1", function(d) { return d.source.x; })
+		    .attr("y1", function(d) { return d.source.y; })
+		    .attr("x2", function(d) { return d.target.x; })
+		    .attr("y2", function(d) { return d.target.y; });
+
+		node.attr("cx", function(d) { return d.x; })
+		    .attr("cy", function(d) { return d.y; });
+	});
+
+	node.on('click', vm.clickNode);
+
 }
+
+
+var d3Subs = [];
+vm.nodes.subscribe(function (newNodes) {
+    updateD3({
+    	'nodes' : newNodes,
+    	'links' : vm.edges()
+    });
+    ko.utils.arrayForEach(d3Subs, function (sub) { sub.dispose(); });
+    ko.utils.arrayForEach(newNodes, function (node) {
+        d3Subs.push(node.toD3.subscribe(function () {
+		    updateD3({
+		    	'nodes' : newNodes,
+		    	'links' : vm.edges()
+		    });
+        }));
+    });
+});
