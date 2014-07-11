@@ -7,17 +7,15 @@ function Playlist() {
 
     // ADD A SONG TO THE END OF THE PLAYLIST
     self.addSong = function(song) {
-        if(!self.playing)
+        if(self.songs.indexOf(song) === -1)
             self.songs.push(song);
     };
 
     // REMOVE A SONG FROM THE PLAYLIST
     self.removeSong = function(song) {
-        if(!self.playing) {
-            var index = self.songs.indexOf(song);
-            if (index > -1) {
-                self.songs.splice(index, 1);
-            }
+        var index = self.songs.indexOf(song);
+        if (index > -1) {
+            self.songs.splice(index, 1);
         }
     };
 
@@ -38,6 +36,15 @@ function Playlist() {
             self.playing = true;
             self.startWaveform();
             self.currentSong = 0;
+            self.songs()[self.currentSong].play(self.songEnded);
+        }
+    };
+
+    self.playSong = function(song) {
+        if(self.songs().length > 0) {
+            self.currentSong = self.songs.indexOf(song);
+            self.playing = true;
+            self.startWaveform();
             self.songs()[self.currentSong].play(self.songEnded);
         }
     };

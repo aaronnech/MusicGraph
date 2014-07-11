@@ -65,8 +65,7 @@ function AppViewModel() {
 	}
 
 	self.playSong = function(song) {
-		self.playList.addSong(song);
-		song.play();
+		self.playList.playSong(song);
 	};
 
 	self.explore = function(node, result) {
@@ -78,6 +77,7 @@ function AppViewModel() {
                 makeSongs(node, result);
                 break;
             case NODE_TYPES.SONG:
+            	self.playList.addSong(result);
                 self.playSong(result);
                 break;
         }

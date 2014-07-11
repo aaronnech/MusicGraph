@@ -84,6 +84,8 @@ line.link {
 
 .playlist-list li .song-name{
 	margin-left: 20px;
+	color: #ecf0f1;
+	text-decoration: none;
 }
 
 .playlist-list li .x-button {
