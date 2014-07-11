@@ -11,7 +11,12 @@ function State() {
 		var songs = protoSongs.map(function(protoSong) {
 			return new Song(protoSong);
 		});
-		playList.songs(songs);
+		if(songs) {
+			playList.songs(songs);
+		} else {
+			if(self.isSaved)
+				localStorage.removeItem('playlist');
+		}
 	};
 
 	self.saveSongs = function(playList) {
