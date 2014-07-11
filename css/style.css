@@ -11,8 +11,9 @@ body {
 }
 
 #imageIcon {
-	margin-top: 2%;
-	margin-left: 4%;
+	margin-top: 3%;
+	margin-left: 14%;
+	margin-bottom: 50px;
 }
 
 #playlist {
@@ -160,5 +161,23 @@ line.link {
 
 
 .spotify-make-playlist {
+	background: #2a2c2b;
+	margin: 0 auto;
+	border: none;
+	padding: 10px;
+	font-weight: bold;
+	font-size: 1.2em;
+	padding-top: 15px;
+	color: #ecf0f1;
+	display: block;
+	width: 50%;
+}
 
+.spotify-make-playlist .spotify-icon {
+	float: left;
+	margin-top: -5px;
+}
+
+.spotify-make-playlist:hover {
+	cursor: pointer;
 }

@@ -103,6 +103,10 @@ function AppViewModel() {
 		makeArtists(drilledGenre, drilledArtists);
 	};
 
+	self.makePlaylist = function() {
+
+	};
+
 	self.explore = function(node, result) {
         switch (node.nodeType) {
             case NODE_TYPES.GENRE:

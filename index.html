@@ -45,8 +45,8 @@
 			<audio id="audio-player-2"></audio>
 			<div id="playlist">
 				<img id="imageIcon" src="img/logo.png" id="logo" />
-				<button class="spotify-make-playlist" data-bind="visible: playList.songs().length > 0">
-					<img src="img/spotify.png" class="spotify-icon"/>Make Playlist|<span data-bind="text: playList.songs().length"></span></small>
+				<button class="spotify-make-playlist" data-bind="visible: playList.songs().length > 0, click: makePlaylist">
+					<img src="img/spotify.png" class="spotify-icon"/>Make Playlist<small>:<span data-bind="text: playList.songs().length"></span></small>
 				</button>
 				<ul class="playlist-list" data-bind="foreach: playList.songs">
 					<li>
