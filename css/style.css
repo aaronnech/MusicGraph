@@ -107,6 +107,11 @@ line.link {
 	margin-left: 20px;
 	color: #ecf0f1;
 	text-decoration: none;
+	display: inline-block;
+	white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+  	width: 350px;
 }
 
 
