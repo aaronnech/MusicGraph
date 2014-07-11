@@ -1,0 +1,25 @@
+body {
+	background: #34495e;
+	color: #ecf0f1;
+	font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+#app {
+	width: 100%;
+}
+
+#buffer {
+	width: 100%;
+	height: 800px;
+}
+
+#playlist {
+	width: 33%;
+	float: left;
+}
+
+#interactive-pane {
+	width: 64%;
+	float: right;
+	height: 800px;
+}
