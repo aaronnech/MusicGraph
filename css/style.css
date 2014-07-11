@@ -190,6 +190,7 @@ line.link {
 	left: 20%;
 	background: #3498db;
 	display: none;
+	font-weight: bold;
 }
 
 .alert-spotify-correct {
@@ -200,4 +201,5 @@ line.link {
 	left: 20%;
 	background: #3498db;
 	display: none;
+	font-weight: bold;
 }
