@@ -18,12 +18,12 @@ function Node(vm, dataString, nodeType) {
     self.onClick = function(callback) {
         switch (self.nodeType) {
             case NODE_TYPES.GENRE:
-                self.vm.apiService.getArtists(self.dataString, function(results) {
+                self.vm.apiService.getArtists(self.dataString.apiName, function(results) {
                     callback(self, results);
                 });
                 break;
             case NODE_TYPES.ARTIST:
-                self.vm.apiService.getArtistTopTracks(dataString.id, function(results) {
+                self.vm.apiService.getArtistTopTracks(self.dataString.id, function(results) {
                     callback(self, results);
                 });
                 break;
