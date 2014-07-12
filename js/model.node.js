@@ -3,8 +3,6 @@ var nodeCounter = 0;
 function Node(vm, dataString, nodeType) {
     var self = this;
 
-    console.log(vm);
-
     self.x = 0;
     self.y = 0;
 

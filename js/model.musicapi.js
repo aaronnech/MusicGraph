@@ -34,15 +34,15 @@ function MusicAPI() {
         });
     };
 
-    self.loadSimilarGenres = function(genreName) {
-        var apiKey = 'YTBBANYZHICTAFW2P';
-        var url = 'https://developer.echonest.com/api/v4/genre/similar';
-        $.getJSON(url, {api_key:apiKey, name:genreName },
-            function(data) {
-                var genres = data.response.genres;
-                console.log(genres);
-            });
-    }
+    // self.loadSimilarGenres = function(genreName) {
+    //     var apiKey = 'YTBBANYZHICTAFW2P';
+    //     var url = 'https://developer.echonest.com/api/v4/genre/similar';
+    //     $.getJSON(url, {api_key:apiKey, name:genreName },
+    //         function(data) {
+    //             var genres = data.response.genres;
+    //             console.log(genres);
+    //         });
+    // }
 
     self.getRelatedArtists = function(artistId, callback) {
         $.ajax({
