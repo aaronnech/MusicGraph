@@ -1,6 +1,6 @@
 var nodeCounter = 0;
 
-function Node(vm, song, nodeType, x, y) {
+function Node(vm, dataString, nodeType, x, y) {
     var self = this;
 
     self.x = x;
@@ -9,7 +9,7 @@ function Node(vm, song, nodeType, x, y) {
     self.vm = vm;
     self.weight = 1;
     self.nodeType = nodeType;
-    self.song = song;
+    self.dataString = dataString;
     self.id = new ko.observable('node-' + nodeCounter++);
 
     // HANDLES CLICK EVENTS ON THIS NODE

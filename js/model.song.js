@@ -15,7 +15,6 @@ function Song(track) {
 	}
 
 	var self = this;
-	
 
 	var PLAYER_ID = 'audio-player';
 
