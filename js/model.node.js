@@ -10,6 +10,7 @@ function Node(viewModel, song, nodeType, x, y) {
     self.nodeType = nodeType;
     self.song = song;
 
+    // HANDLES CLICK EVENTS ON THIS NODE
     self.onClick = function() {
         switch (self.nodeType) {
             case NODE_TYPES.GENRE:
@@ -25,7 +26,14 @@ function Node(viewModel, song, nodeType, x, y) {
                 // NEEDED?
         }
     };
-}
+
+    self.toD3 = ko.computed(function() {
+        return {
+            x : self.position.x(),
+            y : self.position.y()
+        };
+    });
+};
 
 var NODE_TYPES = {
     GENRE : 0,

@@ -1,7 +1,8 @@
-function Playlist() {
+function Playlist(viewModel) {
     var self = this;
 
-    self.songs = [];
+    self.viewModel = viewModel;
+    self.songs = ko.observableArray([]);
 
     // ADD A SONG TO THE END OF THE PLAYLIST
     self.addSong = function(song) {
@@ -19,5 +20,10 @@ function Playlist() {
     // RETURNS THE LENGTH OF THE PLAYLIST
     self.length = function() {
         return songs.length;
+    };
+
+    // HANDLES CLICK EVENTS ON SONGS IN THE PLAYLIST
+    self.onClick = function(song) {
+        // Handle
     };
 };
