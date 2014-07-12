@@ -3,8 +3,8 @@ var nodeCounter = 0;
 function Node(vm, song, nodeType, x, y) {
     var self = this;
 
-    self.x = new ko.observable(x);
-    self.y = new ko.observable(y);
+    self.x = x;
+    self.y = y;
 
     self.vm = vm;
     self.weight = 1;
