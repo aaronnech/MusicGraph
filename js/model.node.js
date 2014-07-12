@@ -7,6 +7,7 @@ function Node(vm, song, nodeType, x, y) {
     self.y = new ko.observable(y);
 
     self.vm = vm;
+    self.weight = 1;
     self.nodeType = nodeType;
     self.song = song;
     self.id = new ko.observable('node-' + nodeCounter++);
