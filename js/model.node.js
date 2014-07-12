@@ -35,8 +35,8 @@ function Node(vm, song, nodeType, x, y) {
 
     self.toD3 = ko.computed(function() {
         return {
-            x : self.x(),
-            y : self.y()
+            x : self.x,
+            y : self.y
         };
     });
 };
