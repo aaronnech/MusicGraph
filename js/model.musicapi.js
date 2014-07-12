@@ -1,7 +1,6 @@
-//Load Genere and top Artist relate to that
 jQuery.ajaxSettings.traditional = true;
 var host = 'http://developer.echonest.com/api/v4/';
-var apiKey =  'YTBBANYZHICTAFW2P';
+var apiKey = 'YTBBANYZHICTAFW2P';
 var knownSongs = {};
 var curGenre = null;
 var curSong = null;
