@@ -28,7 +28,7 @@ function Playlist() {
 
     self.songEnded = function() {
         if(self.playing) {
-            self.currentSong(self.currentSong + 1);
+            self.currentSong(self.currentSong() + 1);
             if(self.currentSong() < self.songs().length) {
                 self.songs()[self.currentSong()].play(self.songEnded);
             } else {
@@ -51,12 +51,6 @@ function Playlist() {
             self.playing = true;
             self.startWaveform();
             self.songs()[self.currentSong()].play(self.songEnded);
-
-            $("audio").animate({volume: 0}, 0);
-            $("audio").animate({volume: 1.0}, 500);
-            setTimeout(function() {
-                $("audio").animate({volume: 0}, 1000);
-            }, 29500);
         }
     };
 

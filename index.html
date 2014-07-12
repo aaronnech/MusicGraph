@@ -43,9 +43,9 @@
 				<h2 id="playlistTitle" data-bind="visible: playList.songs().length > 0">Playlist</h2>
 				<ul class="playlist-list" data-bind="foreach: playList.songs">
 					<li>
-						<a class="song-name" href="#" data-bind="text: name, click: $root.playSong"></a>
-						<span data-bind="visible: isPlaying()" class="play-icon">▶</span>
+						<a class="song-name" href="#" data-bind="text: fullName, click: $root.playSong"></a>
 						<a class="x-button" href="#" data-bind="click: $root.deletePlaylistSong">X</a>
+						<span data-bind="visible: isPlaying()" class="play-icon">▶</span>
 					</li>
 				</ul>
 			</div>
