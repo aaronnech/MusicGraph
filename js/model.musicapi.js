@@ -58,20 +58,6 @@ function loadTopSongs(genreName, preset) {
 
 // SPOTIFY API CODE
 
-var getFirstArtist = function (query, callback) {
-    $.ajax({
-        url: 'https://api.spotify.com/v1/search',
-        data: {
-            q: query,
-            type: 'artist'
-        },
-        success: function (response) {
-            var item = response.artists.items[0];
-            callback(item.id, item.name);
-        }
-    });
-};
-
 var getRelatedArtists = function (artistId, callback) {
     $.ajax({
         url: 'https://api.spotify.com/v1/artists/' + artistId + '/related-artists',
