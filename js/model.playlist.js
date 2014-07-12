@@ -17,8 +17,11 @@ function Playlist() {
     };
 
     self.getTracks = function() {
-
-        //TODO
+        var results = [];
+        for (var i = 0; i < self.songs().length; i++) {
+            results.push(self.songs()[i].track);
+        }
+        return results;
     };
 
     // ADD A SONG TO THE END OF THE PLAYLIST
