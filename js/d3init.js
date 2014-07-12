@@ -68,20 +68,20 @@ var updateD3 = function(json) {
 		    .attr("y2", function(d) { return d.target.y; });
 
 		// Translate the groups
-	    gnodes.attr("transform", function(d) { 
-		   return 'translate(' + [d.x, d.y] + ')'; 
-		});    
+	    gnodes.attr("transform", function(d) {
+		   return 'translate(' + [d.x, d.y] + ')';
+		});
 	});
 
 	enteredGNode.on('click', vm.clickNode);
 	enteredGNode.on('mouseover', function(d) {
-		svg.selectAll('text').attr("class", "activated");
-		svg.selectAll('rect').attr("class", "activated");
+		// d3.select(this).selectAll("text").attr("class", "activated");
+		d3.select(this).selectAll("node").attr("class", "activated");
 		vm.nodeMouseOver(d);
 	});
 	enteredGNode.on('mouseout', function(d) {
-		svg.selectAll('text').attr("class", "");
-		svg.selectAll('rect').attr("class", "");
+		// d3.select(this).selectAll("text").attr("class", "");
+		d3.select(this).selectAll("node").attr("class", "");
 		vm.nodeMouseOut(d);
 	});
 

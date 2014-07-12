@@ -2,9 +2,8 @@
 // https://developers.google.com/youtube/terms
 
 // Helper function to display JavaScript value on HTML page.
-function showResponse(response) {
+function getResponse(response) {
     var responseString = JSON.stringify(response, '', 2);
-    document.getElementById('response').innerHTML += responseString;
 }
 
 // Called automatically when JavaScript client library is loaded.
@@ -17,10 +16,13 @@ function onYouTubeApiLoad() {
     // This API key is intended for use only in this lesson.
     // See http://goo.gl/PdPA1 to get a key for your own applications.
     gapi.client.setApiKey('AIzaSyAnKiqjbrJRs8j6qzRPlgilMc236Ypautw');
+<<<<<<< HEAD
 
     search(x);
+=======
+>>>>>>> 74444c348c16678a000e9c4ef916ae322bb08a78
 }
-
+ 
 function search(input) {
     // Use the JavaScript client library to create a search.list() API call.
     var request = gapi.client.youtube.search.list({
@@ -35,6 +37,7 @@ function search(input) {
 
 // Called automatically with the response of the YouTube API request.
 function onSearchResponse(response) {
+<<<<<<< HEAD
     showResponse(response);
 }
 
@@ -43,4 +46,7 @@ function displayResult(response){
     var videoId = response.resourceId.videoId
     $.append(title, videoId);
     console.log(title, videoId)
+=======
+    getResponse(response);
+>>>>>>> 74444c348c16678a000e9c4ef916ae322bb08a78
 }
