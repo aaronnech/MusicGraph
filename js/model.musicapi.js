@@ -82,20 +82,14 @@ var getRelatedArtists = function (artistId, callback) {
     });
 };
 
-var getIndividualArtist = function (query, callback) {
+var getIndividualArtist = function (artistId, callback) {
     $.ajax({
-        url: 'https://api.spotify.com/v1/search',
-        data: {
-            q: query,
-            type: 'artist'
-        },
+        url: 'https://api.spotify.com/v1/artists/' + artistId,
         success: function (response) {
-            var item = response.tracks.items[0];
-            callback(item.id, item.name);
+            callback(response);
         }
     });
 };
-
 
 var getArtistTopTracks  = function (artistId, callback) {
     $.ajax({
