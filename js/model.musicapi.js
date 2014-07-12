@@ -16,10 +16,7 @@ function loadTopArtists(genreName, callback) {
 //     $.getJSON(url, {api_key:apiKey, name:genreName },
 //         function(data) {
 //             var genres = data.response.genres;
-//         });
-//     $.each(genres, function(genre, i) {
-//                     var a = $("<a>").text(genre.name).attr('href', '?genre='+genre.name);
-//                     console.log(a);
+//             console.log(genres);
 //         });
 // }
 
