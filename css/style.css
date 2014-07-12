@@ -53,3 +53,15 @@ line.link {
 	stroke-width: 3px;
 	stroke: #e67e22;
 }
+
+.waveform {
+	position: absolute;
+	/*margin-top: -300px;*/
+	fill: none;
+	stroke: rgba(52, 152, 219, 1);
+	stroke-width: 0.25;
+	width: 100%;
+	left: 0px;
+	height: 10%;
+	z-index: -1000;
+}
