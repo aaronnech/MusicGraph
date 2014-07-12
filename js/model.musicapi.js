@@ -1,5 +1,5 @@
 //Load Genere and top Artist relate to that
-jQuery.ajaxSettings.traditional = true; 
+jQuery.ajaxSettings.traditional = true;
 var host = 'http://developer.echonest.com/api/v4/';
 var apiKey =  'YTBBANYZHICTAFW2P';
 var deferredSongs = null;
@@ -7,8 +7,6 @@ var allGenres = {};
 var genreList = ['rock'];
 var fullGenreList = [];
 var player;
-
-
 
 function loadTopArtists(genreName) {
     var url = host + 'genre/artists'
@@ -24,9 +22,6 @@ function loadTopArtists(genreName) {
             });
         });
 }
-
-
-
 
 // find template and compile it
 var templateSource = document.getElementById('results-template').innerHTML,
