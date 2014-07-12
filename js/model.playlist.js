@@ -2,8 +2,15 @@ function Playlist() {
     var self = this;
 
     self.songs = new ko.observableArray([]);
-    self.currentSong = -1;
+    self.currentSong = new ko.observable(-1);
     self.playing = false;
+
+
+    var setSongsNotPlaying = function() {
+        for(var i = 0; i < self.songs().length; i++) {
+            self.songs()[i].isPlaying(false);
+        }
+    };
 
     // ADD A SONG TO THE END OF THE PLAYLIST
     self.addSong = function(song) {
@@ -21,9 +28,9 @@ function Playlist() {
 
     self.songEnded = function() {
         if(self.playing) {
-            self.currentSong++;
-            if(self.currentSong < self.songs().length) {
-                self.songs()[self.currentSong].play(self.songEnded);
+            self.currentSong(self.currentSong + 1);
+            if(self.currentSong() < self.songs().length) {
+                self.songs()[self.currentSong()].play(self.songEnded);
             } else {
                 self.playing = false;
                 self.stopWaveform();
@@ -33,19 +40,17 @@ function Playlist() {
 
     self.play = function() {
         if(self.songs().length > 0) {
-            self.playing = true;
-            self.startWaveform();
-            self.currentSong = 0;
-            self.songs()[self.currentSong].play(self.songEnded);
+            self.playSong(self.songs()[0]);
         }
     };
 
     self.playSong = function(song) {
         if(self.songs().length > 0) {
-            self.currentSong = self.songs.indexOf(song);
+            setSongsNotPlaying();
+            self.currentSong(self.songs.indexOf(song));
             self.playing = true;
             self.startWaveform();
-            self.songs()[self.currentSong].play(self.songEnded);
+            self.songs()[self.currentSong()].play(self.songEnded);
         }
     };
 
