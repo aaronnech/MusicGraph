@@ -2,7 +2,7 @@ function MusicAPI() {
     var self = this;
 
     self.getArtists = function(genreName, callback) {
-        var url = 'https://developer.echonest.com/api/v4/genre/artists'
+        var url = 'https://developer.echonest.com/api/v4/genre/artists';
         var apiKey = 'YTBBANYZHICTAFW2P';
         var numberOfResults = 10;
 
@@ -34,14 +34,15 @@ function MusicAPI() {
         });
     };
 
-    // self.loadSimilarGenres = function(genreName) {
-    //     var url = host + 'genre/similar'
-    //     $.getJSON(url, {api_key:apiKey, name:genreName },
-    //         function(data) {
-    //             var genres = data.response.genres;
-    //             console.log(genres);
-    //         });
-    // }
+    self.loadSimilarGenres = function(genreName) {
+        var apiKey = 'YTBBANYZHICTAFW2P';
+        var url = 'https://developer.echonest.com/api/v4/genre/similar';
+        $.getJSON(url, {api_key:apiKey, name:genreName },
+            function(data) {
+                var genres = data.response.genres;
+                console.log(genres);
+            });
+    }
 
     self.getRelatedArtists = function(artistId, callback) {
         $.ajax({
@@ -79,7 +80,6 @@ function MusicAPI() {
         });
     };
 };
-
 
 function RequestQueue(numberOfRequests, finished) {
     var self = this;
