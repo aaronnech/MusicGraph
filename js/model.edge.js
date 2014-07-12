@@ -1,3 +1,6 @@
+/**
+ * @fileOverview An Edge is a connection between two nodes.
+ */
 function Edge(source, target) {
     var self = this;
 

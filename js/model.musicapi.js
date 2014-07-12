@@ -1,3 +1,8 @@
+/**
+ * @fileOverview Music Spotify API interaction object. This object is responsible for
+ * all communication with Spotify and EchoNest APIs.
+ */
+
 function MusicAPI(token) {
     var self = this;
 
@@ -6,6 +11,11 @@ function MusicAPI(token) {
     var CLIENT_ID = '510822911bb745649354e6784b47de76';
     var REDIRECT_URL = 'http://musicgraph.in/index.html';
 
+
+    /**
+     * Helper function to perform a login (sets an action and value to localstorage
+     * so our application can act on it when it returns)
+     */
     var login = function(action, value) {
         var url = 'https://accounts.spotify.com/authorize?client_id=' + CLIENT_ID +
             '&response_type=token' +
@@ -16,6 +26,10 @@ function MusicAPI(token) {
         window.location = url;
     };
 
+
+    /**
+     * Gets a spotify username
+     */
     self.getUsername = function(callback) {
         var url = 'https://api.spotify.com/v1/me';
         $.ajax(url, {
@@ -32,10 +46,18 @@ function MusicAPI(token) {
         });
     };
 
+
+    /**
+     * Sets a spotify access token
+     */
     self.setToken = function(newToken) {
         accessToken = newToken;
     };
 
+
+    /**
+     * Creates a spotify playlist
+     */
     self.createPlaylist = function(username, name, callback) {
         var url = 'https://api.spotify.com/v1/users/' + username +
             '/playlists';
@@ -59,6 +81,10 @@ function MusicAPI(token) {
         });
     }
 
+
+    /**
+     * Adds tracks to a spotify playlist
+     */
     self.addTracksToPlaylist = function(username, playlist, tracks, callback) {
         var url = 'https://api.spotify.com/v1/users/' + username +
             '/playlists/' + playlist +
@@ -81,6 +107,10 @@ function MusicAPI(token) {
         });
     }
 
+
+    /**
+     * Makes a spotify playlist out of this application's playlist
+     */
     self.makePlaylist = function(playList, name) {
         if(accessToken) {
             self.getUsername(function(username) {
@@ -90,11 +120,15 @@ function MusicAPI(token) {
                     });
                 });
             });
-        } else {
+        } else { // Not authenticated!
             login('make-playlist', name);
         }
     };
 
+
+    /**
+     * Gets the artists from a genre
+     */
     self.getArtists = function(genreName, callback) {
         var url = 'https://developer.echonest.com/api/v4/genre/artists';
         var apiKey = 'YTBBANYZHICTAFW2P';
@@ -114,6 +148,10 @@ function MusicAPI(token) {
             });
     };
 
+
+    /**
+     * Searches artists from a query name
+     */
     self.searchArtist = function(query, callback) {
         $.ajax({
             url: 'https://api.spotify.com/v1/search',
@@ -128,16 +166,10 @@ function MusicAPI(token) {
         });
     };
 
-    // self.loadSimilarGenres = function(genreName) {
-    //     var apiKey = 'YTBBANYZHICTAFW2P';
-    //     var url = 'https://developer.echonest.com/api/v4/genre/similar';
-    //     $.getJSON(url, {api_key:apiKey, name:genreName },
-    //         function(data) {
-    //             var genres = data.response.genres;
-    //             console.log(genres);
-    //         });
-    // }
 
+    /**
+     * Gets related artists for an artistId
+     */
     self.getRelatedArtists = function(artistId, callback) {
         $.ajax({
             url: 'https://api.spotify.com/v1/artists/' + artistId + '/related-artists',
@@ -151,6 +183,10 @@ function MusicAPI(token) {
         });
     };
 
+
+    /**
+     * Gets the individual artist record for an artist id
+     */
     self.getIndividualArtist = function(artistId, callback) {
         $.ajax({
             url: 'https://api.spotify.com/v1/artists/' + artistId,
@@ -161,6 +197,10 @@ function MusicAPI(token) {
         });
     };
 
+
+    /**
+     * Gets an artist's top tracks.
+     */
     self.getArtistTopTracks = function(artistId, callback) {
         $.ajax({
             url: 'https://api.spotify.com/v1/artists/' + artistId + '/top-tracks?country=US',
@@ -175,17 +215,36 @@ function MusicAPI(token) {
     };
 };
 
+
+/**
+ * Because we had to execute multiple parallel requests and wait for all of them to
+ * finish before executing a callback, this ugly stepchild was born.
+ *
+ * A RequestQueue takes a parameters a expected number of request completions,
+ * and a callback to execute when they are all finished.
+ *
+ * You then instead of passing a usual callback to a request, pass a middleman
+ * function generated as a closure of this function which will increment a counter.
+ */
 function RequestQueue(numberOfRequests, finished) {
     var self = this;
     self.numberOfRequests = numberOfRequests;
     self.done = 0;
 
+    /**
+     * Helper function to check if the number of requests have been met
+     */
     var checkComplete = function() {
         if(self.done == self.numberOfRequests) {
             finished();
         }
     }
 
+
+    /**
+     * Called in place of a usual callback. The callback passed
+     * is the usual callback.
+     */
     self.enqueue = function(callback) {
         return function(parameter) {
             callback(parameter);

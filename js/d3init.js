@@ -1,22 +1,33 @@
-var width = 800;
-var height = 600;
+/**
+ * @fileOverview D3 graph drawing setup
+ */
 
+
+// D3 width and height (aspect)
+var d3Width = 800;
+var d3Height = 600;
+
+
+// Moves a selection to the front in D3
 d3.selection.prototype.moveToFront = function() {
   return this.each(function(){
     this.parentNode.appendChild(this);
   });
 };
 
+// The force graph
 var force = d3.layout.force()
     .charge(-500)
     .linkDistance(250)
-    .size([width, height]);
+    .size([d3Width, d3Height]);
 
+// The SVG to append.
 var svg = d3.select("#interactive-pane").append("svg")
-    .attr("viewBox", "0 0 " + width + " " + height)
+    .attr("viewBox", "0 0 " + d3Width + " " + d3Height)
     .attr("preserveAspectRatio", "xMidYMid meet");
 
 
+//Updates D3 given new JSON data from Knockout
 var updateD3 = function(json) {
 	force
 	  .nodes(json.nodes)
@@ -29,7 +40,7 @@ var updateD3 = function(json) {
 	  .attr("class", "link");
 	link.exit().remove();
 
-	// Create the groups under svg
+	// Node groups
 	var gnodes = svg.selectAll('g.gnode')
 	  .data(json.nodes)
 	  .moveToFront();
@@ -38,7 +49,7 @@ var updateD3 = function(json) {
 	  .call(force.drag);
     gnodes.exit().remove();
 
-	// Add one circle in each group
+	// Add a node to the group
 	var node = enteredGNode.insert("circle")
 	  .attr("class", function(d) {
         var resultClass;
@@ -71,6 +82,7 @@ var updateD3 = function(json) {
         return resultSize;
     });
 
+	// Add text to the group
 	var text = enteredGNode.insert('text')
       .attr("dx", ".10em")
       .attr("dy", ".10em")
@@ -118,19 +130,17 @@ var updateD3 = function(json) {
 
 	enteredGNode.on('click', vm.clickNode);
 	enteredGNode.on('mouseover', function(d) {
-		// d3.select(this).selectAll("text").attr("class", "activated");
 		d3.select(this).selectAll("node").attr("class", "activated");
 		vm.nodeMouseOver(d);
 	});
 	enteredGNode.on('mouseout', function(d) {
-		// d3.select(this).selectAll("text").attr("class", "");
 		d3.select(this).selectAll("node").attr("class", "");
 		vm.nodeMouseOut(d);
 	});
 
 }
 
-
+// Knockout subscription to connect D3 to knockout.
 var d3Subs = [];
 vm.nodes.subscribe(function (newNodes) {
     updateD3({

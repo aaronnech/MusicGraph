@@ -7,8 +7,8 @@
 		<link rel="shortcut icon" type="image/png" href="favicon.png" />
 		<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' type='text/css' />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
-		<script type="text/javascript" src="js/knockout-3.1.0.debug.js"></script>
-		<script type="text/javascript" src="js/d3.js"></script>
+		<script type="text/javascript" src="js/knockout-3.1.0.js"></script>
+		<script type="text/javascript" src="js/d3.min.js"></script>
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/angular.min.js"></script>
 		<script type="text/javascript" src="js/plangular.js"></script>
@@ -24,6 +24,7 @@
 		<script src="https://apis.google.com/js/client:plusone.js" type="text/javascript"></script>
 	</head>
 	<body>
+		<!-- Wave effect controlled by plangular -->
 		<svg class="absolute waveform waveform-small" xmlns="http://www.w3.org/2000/svg" viewBox="0 -2 64 34" preserveAspectRatio="none">
 	      <path d="M 0 16 C 4.91407 16 6.55209 9.44791 13.1042 9.44791 C 20.7422 9.44791 21.1042 30.5521 29.1042 30.5521 C 37.1042 30.5521 37.1042 6.55209 45.1042 6.55209 C 53.1042 6.55209 54.7422 17.4479 61.1042 17.4479 C 62.5521 17.4479 62.9141 16 64 16 C 64 16 64 16 64 16">
 	        <animate class="animate" id="waveOne" attributeName="d" values="
@@ -38,6 +39,7 @@
 	            M0 16 C6 16 8 8 16 8 C24 8 24 32 32 32 C40 32 40 8 48 8 C56 8 58 16 64 16 C64 16 64 16 64 16 C64 16 64 16 64 16 " dur="5s" repeatCount="indefinite"></animate>
 	      </path>
 	    </svg>
+	    <!-- Application DOM -->
 		<div id="app">
 			<div class="alert-spotify-correct">
 				<p>Spotify playlist saved successfully.</p>
@@ -46,9 +48,10 @@
 				<p>Spotify playlist not saved.. Sorry!</p>
 			</div>
 			<div class="breadcrumbs">
-				<button class="breadcrumb artist" data-bind="visible: level() == 'song', click: clickArtistBreadCrumb">Artists</button>
-				<button class="breadcrumb genre" data-bind="visible: level() == 'song' || level() == 'artist', click: clickGenreBreadCrumb">Genres</button>
+				<button class="breadcrumb artist" data-bind="visible: level() == 'song', click: clickArtistBreadCrumb">Artists&#10148;</button>
+				<button class="breadcrumb genre" data-bind="visible: level() == 'song' || level() == 'artist', click: clickGenreBreadCrumb">Genres&#10148;</button>
 			</div>
+			<!-- Two audio players for prefetching -->
 			<audio id="audio-player"></audio>
 			<audio id="audio-player-2"></audio>
 			<div id="playlist">
@@ -73,6 +76,7 @@
 		<script type="text/javascript" src="js/init.js"></script>
 		<script type="text/javascript" src="js/d3init.js"></script>
 		<script>
+			// initalize genre at first.
 			vm.initGenre();
 		</script>
 	</body>

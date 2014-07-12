@@ -1,10 +1,22 @@
+/**
+ * @fileOverview Communicates and manages local state through the HTML5
+ *    LocalStorage object.
+ */
 function State() {
 	var self = this;
 
+	/**
+	 * Checks to see if a playlist state has been saved
+	 * @return {Boolean} true if it has, false otherwise
+	 */
 	self.isSaved = function() {
 		return localStorage.getItem('playlist') != null;
 	};
 
+
+	/**
+	 * Given a playlist, attempts to restore its' songs from storage
+	 */
 	self.restoreSongs = function(playList) {
 		var protoSongs = JSON.parse(JSON.parse(localStorage.getItem('playlist')));
 
@@ -19,6 +31,10 @@ function State() {
 		}
 	};
 
+
+	/**
+	 * Given a playlist, attempts to save its' songs to storage
+	 */
 	self.saveSongs = function(playList) {
 		var protoSongs = JSON.stringify(playList.songs().map(function(song) {
 			return song.track;
@@ -26,6 +42,11 @@ function State() {
 		localStorage.setItem('playlist', JSON.stringify(protoSongs));
 	};
 
+
+	/**
+	 * Given a view model, and saved actions to storage, we will execute on those
+	 * actions.
+	 */
 	self.doLocalActions = function(vm) {
 		var hash = location.hash.replace(/#/g, '');
 		var all = hash.split('&');

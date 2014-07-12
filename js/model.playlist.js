@@ -1,5 +1,17 @@
+/**
+ * @fileOverview A Playlist is a stateful object that controls and manages
+ * playing songs through song objects.
+ *
+ * When the page loads, it attempts to ask the passed state manager for any
+ * playlist state that may have been stored.
+ * 
+ */
+
 function Playlist(state) {
     var self = this;
+    var PLAYER_ID = 'audio-player';
+    var PLAYER_ID_2 = 'audio-player-2';
+
     self.state = state;
     self.songs = new ko.observableArray([]);
     if(self.state.isSaved()) {
@@ -9,12 +21,19 @@ function Playlist(state) {
     self.playing = false;
 
 
+    /**
+     * Helper that sets all the song states to not playing.
+     */
     var setSongsNotPlaying = function() {
         for(var i = 0; i < self.songs().length; i++) {
             self.songs()[i].isPlaying(false);
         }
     };
 
+
+    /**
+     * Get the playlist in Spotify API track form.
+     */
     self.getTracks = function() {
         var results = [];
         for (var i = 0; i < self.songs().length; i++) {
@@ -23,6 +42,11 @@ function Playlist(state) {
         return results;
     };
 
+
+    /**
+     * Find (using a linear search) a passed song
+     * Comparison is defined as equal reference or equal full song name.
+     */
     self.findSong = function(song) {
         for(var i = 0; i < self.songs().length; i++) {
             if(self.songs()[i] === song ||
@@ -32,7 +56,10 @@ function Playlist(state) {
         return -1;
     };
 
-    // ADD A SONG TO THE END OF THE PLAYLIST
+
+    /**
+     * Adds a song (if not present in the list) to the playlist.
+     */
     self.addSong = function(song) {
         if(self.findSong(song) === -1) {
             self.songs.push(song);
@@ -40,7 +67,10 @@ function Playlist(state) {
         }
     };
 
-    // REMOVE A SONG FROM THE PLAYLIST
+
+    /**
+     * Removes a song (if present) from the list
+     */
     self.removeSong = function(song) {
         var index = self.findSong(song);
         if (index > -1) {
@@ -49,6 +79,10 @@ function Playlist(state) {
         }
     };
 
+
+    /**
+     * Helper that sets all the song states to not playing.
+     */
     self.songEnded = function() {
         if(self.playing) {
             self.currentSong(self.currentSong() + 1);
@@ -61,15 +95,20 @@ function Playlist(state) {
         }
     };
 
+
+    /**
+     * Plays a playlist from the beginning.
+     */
     self.play = function() {
         if(self.songs().length > 0) {
             self.playSong(self.songs()[0]);
         }
     };
 
-    var PLAYER_ID = 'audio-player';
-    var PLAYER_ID_2 = 'audio-player-2';
 
+    /**
+     * Plays a playlist from a given song.
+     */
     self.playSong = function(song) {
         if(self.songs().length > 0) {
             setSongsNotPlaying();
@@ -99,6 +138,10 @@ function Playlist(state) {
         }
     };
 
+
+    /**
+     * Prefetches a song for a given playerId
+     */
     self.prefetchSong = function(playerId) {
         var length = self.songs().length;
         if (length > 0 && self.currentSong() + 1 < length) {
@@ -107,18 +150,21 @@ function Playlist(state) {
         }
     };
 
+
+    /**
+     * Stops the plangular wave effect
+     */
     self.stopWaveform = function() {
         $("#waveOne").attr("dur", "20s");
         $("#waveTwo").attr("dur", "25s");
     };
 
+
+    /**
+     * Starts the plangular wave effect
+     */
     self.startWaveform = function() {
         $("#waveOne").attr("dur", "3s");
         $("#waveTwo").attr("dur", "5s");
-    };
-
-    // RETURNS THE LENGTH OF THE PLAYLIST
-    self.length = function() {
-        return self.songs.length;
     };
 };

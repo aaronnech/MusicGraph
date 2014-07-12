@@ -1,3 +1,11 @@
+/**
+ * @fileOverview A Node is a stateful object that helps bridge the gap
+ * between D3.js and Knockout.js
+ *
+ * It represents a graph node that is clickable
+ */
+
+// Global node counter to keep Ids unique
 var nodeCounter = 0;
 
 function Node(vm, dataString, nodeType) {
@@ -12,7 +20,10 @@ function Node(vm, dataString, nodeType) {
     self.dataString = dataString;
     self.id = new ko.observable('node-' + nodeCounter++);
 
-    // HANDLES CLICK EVENTS ON THIS NODE
+    /**
+     * Called when a node is clicked (triggered by the ViewModel)
+     * @param  {function} callback  Callback to trigger when execution completes
+     */
     self.onClick = function(callback) {
         switch (self.nodeType) {
             case NODE_TYPES.GENRE:
@@ -31,6 +42,11 @@ function Node(vm, dataString, nodeType) {
         }
     };
 
+
+    /**
+     * Converts this node to a KO computed D3 record that can be observed (subscribed to)
+     * by D3
+     */
     self.toD3 = ko.computed(function() {
         return {
             x : self.x,
@@ -39,6 +55,10 @@ function Node(vm, dataString, nodeType) {
     });
 };
 
+/**
+ * Enumeration of possible node types.
+ * @type {Enum.<int>}
+ */
 var NODE_TYPES = {
     GENRE : 0,
     ARTIST : 1,
