@@ -1,24 +1,11 @@
-function Song(api_obj, songId) {
+function Song(songId) {
+
 	var self = this;
 
-	/* Instantiate the global sp object; include models & views */
-	var sp = getSpotifyApi(1);
-	var models = sp.require("sp://import/scripts/api/models");
-	var views = sp.require("sp://import/scripts/api/views");
-	 
-	/* Create an array of tracks from the user's library */
-	var track = models.Track.fromURI('spotify:track:7DJI0fg4dzBJk31sEmn6Zk');
-	 
-	/* Create a temporary playlist for the song */
-	var playlist = new models.Playlist();
-	playlist.add(track);
-	var playerView = new views.Player();
-	playerView.track = null; // Don't play the track right away
-	playerView.context = playlist;
-	 
-	/* Pass the player HTML code to the #player <div /> */
-	$('#player').append(playerView.node);
-
+	require(['$api/models'], function(models) {
+		models.player.playTrack(models.Track.fromURI('spotify:track:3P6p25MvU3qnvWa8L7i5Lr'));
+	});
+	
 	var fetchArtist = function(artistId, callback) {
 		$.ajax({
 			url: 'https://api.spotify.com/v1/artists/' + artistId,
