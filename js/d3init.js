@@ -74,6 +74,21 @@ var updateD3 = function(json) {
 	var text = enteredGNode.insert('text')
       .attr("dx", ".10em")
       .attr("dy", ".10em")
+      .attr("font-size", function(d) {
+        var resultSize;
+        switch (d.nodeType) {
+            case NODE_TYPES.GENRE:
+                resultSize = "20";
+                break;
+            case NODE_TYPES.ARTIST:
+                resultSize = "17";
+                break;
+            case NODE_TYPES.SONG:
+                resultSize = "14";
+                break;
+        }
+        return resultSize;
+      })
       .attr("font-weight", "bold")
       .attr("font-family", "Yanone Kaffeesatz")
       .text(function(d) { return d.dataString.name; });
