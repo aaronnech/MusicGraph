@@ -55,7 +55,21 @@ var updateD3 = function(json) {
         }
         return "node " + resultClass;
         })
-	.attr("r", 30);
+	.attr("r", function(d) {
+        var resultSize;
+        switch (d.nodeType) {
+            case NODE_TYPES.GENRE:
+                resultSize = 30;
+                break;
+            case NODE_TYPES.ARTIST:
+                resultSize = 25;
+                break;
+            case NODE_TYPES.SONG:
+                resultSize = 20;
+                break;
+        }
+        return resultSize;
+    });
 
 	var text = enteredGNode.insert('text')
       .attr("dx", ".10em")
