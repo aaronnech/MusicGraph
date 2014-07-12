@@ -54,15 +54,17 @@ function loadTopSongs(genreName, preset) {
         });
 }
 
-
-
-// SPOTIFY API CODE
+//// Spotify API ////
 
 var getRelatedArtists = function (artistId, callback) {
     $.ajax({
         url: 'https://api.spotify.com/v1/artists/' + artistId + '/related-artists',
         success: function (response) {
-            callback(response);
+            var results = [];
+            for (var i = 0; i < response.artists.length; i++) {
+                results.push(new Artist(response.artists[i]));
+            }
+            callback(results);
         }
     });
 };
@@ -71,16 +73,21 @@ var getIndividualArtist = function (artistId, callback) {
     $.ajax({
         url: 'https://api.spotify.com/v1/artists/' + artistId,
         success: function (response) {
-            callback(response);
+            var result = new Artist(response);
+            callback(result);
         }
     });
 };
 
-var getArtistTopTracks  = function (artistId, callback) {
+var getArtistTopTracks = function (artistId, callback) {
     $.ajax({
         url: 'https://api.spotify.com/v1/artists/' + artistId + '/top-tracks?country=US',
         success: function (response) {
-            callback(response);
+            var results = [];
+            for (var i = 0; i < response.tracks.length; i++) {
+                results.push(new Song(response.tracks[i]));
+            }
+            callback(results);
         }
     });
 };
