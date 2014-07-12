@@ -4,14 +4,14 @@ function Node(vm, song, nodeType, x, y) {
     var self = this;
 
     self.position = {
-        x : ko.observable(x),
-        y : ko.observable(y)
+        x : new ko.observable(x),
+        y : new ko.observable(y)
     };
 
     self.vm = vm;
     self.nodeType = nodeType;
     self.song = song;
-    self.id = 'node-' + nodeCounter++;
+    self.id = new ko.observable('node-' + nodeCounter++);
 
     // HANDLES CLICK EVENTS ON THIS NODE
     self.onClick = function() {
