@@ -48,8 +48,8 @@ function Playlist() {
     }
 
     self.startWaveform = function() {
-        $("#waveOne").attr("dur", "0s");
-        $("#waveTwo").attr("dur", "0s");
+        $("#waveOne").attr("dur", "5s");
+        $("#waveTwo").attr("dur", "8s");
     }
 
     // RETURNS THE LENGTH OF THE PLAYLIST
