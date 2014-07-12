@@ -83,6 +83,7 @@ line.link {
 	stroke-width: 0.25;
 	width: 100%;
 	left: 0px;
+	bottom: 15px;
 	height: 15%;
 	z-index: -1000;
 }

@@ -10,11 +10,13 @@ function Song(track) {
 		if(loop)
 			soundHandle.setAttribute('loop', loop);
 		soundHandle.play();
+		$("audio").animate({volume: 0}, 0);
 		if(typeof ended !== 'undefined')
 			soundHandle.addEventListener('ended', function() {
 				self.isPlaying(false);
 				ended();
 			}, false);
+		$("audio").animate({volume: 1.0}, 1000);
 	}
 
 	var self = this;
