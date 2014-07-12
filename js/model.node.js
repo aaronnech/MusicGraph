@@ -1,3 +1,5 @@
+var nodeCounter = 0;
+
 function Node(vm, song, nodeType, x, y) {
     var self = this;
 
@@ -9,6 +11,7 @@ function Node(vm, song, nodeType, x, y) {
     self.vm = vm;
     self.nodeType = nodeType;
     self.song = song;
+    self.id = 'node-' + nodeCounter++;
 
     // HANDLES CLICK EVENTS ON THIS NODE
     self.onClick = function() {
