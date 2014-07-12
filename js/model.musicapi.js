@@ -130,11 +130,20 @@ function MusicAPI(token) {
      * Gets the artists from a genre
      */
     self.getArtists = function(genreName, callback) {
-        var url = 'https://developer.echonest.com/api/v4/genre/artists';
+        var url = 'http://developer.echonest.com/api/v4/artist/search';
         var apiKey = 'YTBBANYZHICTAFW2P';
         var numberOfResults = 10;
+        var sort = ['familiarity-asc',
+                    'hotttnesss-asc',
+                    'familiarity-desc',
+                    'hotttnesss-desc',
+                    'artist_start_year-asc',
+                    'artist_start_year-desc',
+                    'artist_end_year-asc',
+                    'artist_end_year-desc'];
+        sort = sort[Math.floor(Math.random()*sort.length)];
 
-        $.getJSON(url, {api_key : apiKey, results : numberOfResults, name : genreName},
+        $.getJSON(url, {api_key : apiKey, results : numberOfResults, format : 'json', genre : genreName, sort : sort},
             function(data) {
                 var results = [];
                 var reqQueue = new RequestQueue(numberOfResults, function() {
