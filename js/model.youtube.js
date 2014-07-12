@@ -18,7 +18,7 @@ function onYouTubeApiLoad() {
     // See http://goo.gl/PdPA1 to get a key for your own applications.
     gapi.client.setApiKey('AIzaSyAnKiqjbrJRs8j6qzRPlgilMc236Ypautw');
 
-    search("drake");
+    search(x);
 }
 
 function search(input) {
@@ -36,4 +36,11 @@ function search(input) {
 // Called automatically with the response of the YouTube API request.
 function onSearchResponse(response) {
     showResponse(response);
+}
+
+function displayResult(response){
+    var title = response.title;
+    var videoId = response.resourceId.videoId
+    $.append(title, videoId);
+    console.log(title, videoId)
 }
