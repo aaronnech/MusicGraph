@@ -23,5 +23,8 @@ function Song(track) {
 
 	self.play = function(ended) {
 		startSound(PLAYER_ID, self.url, ended, false);
+        setTimeout(function() {
+            $("audio").animate({volume: 0}, 1000);
+        }, 29500);
 	}
 }
