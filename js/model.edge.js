@@ -3,4 +3,5 @@ function Edge(source, target) {
 
     self.source = source;
     self.target = target;
+    self.weight = 1;
 };
