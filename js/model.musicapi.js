@@ -15,12 +15,8 @@ function loadGenreList() {
     var url = "http://developer.echonest.com/api/v4/genre/list";
     $.getJSON(url, {api_key:apiKey, results:2000, bucket:["description", "urls"]}, function(data) {
            genreList = data.response.genres;
-        _.each(data.response.genres, function(genre, i) {
-            genre.which = i;
-            allGenres[genre.name] = genre;
-            fullGenreList.push(genre);
-            
-        });
+           allGenres[genre.name] = genre;
+           fullGenreList.push(genre);
         processParams();
     });
 }
@@ -32,9 +28,8 @@ function loadTopArtists(genreName) {
     $.getJSON(url, {api_key:apiKey, name:genreName },
         function(data) {
             var artists = data.response.artists;
-            list.empty();
-            _.each(artists, function(artist, i) {
-                var a = $.text(artist.name).attr('href', 'http://static.echonest.com/echotron/?id='+ artist.id);
+            for (x in each(artists, function(artist, i)) {
+                var a = $.text(artist.name).attr('http://static.echonest.com/echotron/?id='+ artist.id);
             });
         });
 }
@@ -58,11 +53,6 @@ function loadTopSongs(genreName, preset) {
         function(data) {
             var songs = data.response.songs;
             curSongs = songs;
-            _.each(songs, function(song, i) {
-                song.which = i;
-                song.adiv = adiv;
-                list.append(adiv);
-            });
 
         });
 }
