@@ -15,19 +15,22 @@ function Node(vm, song, nodeType, x, y) {
 
     // HANDLES CLICK EVENTS ON THIS NODE
     self.onClick = function() {
-        console.log("You clicked me bitch.")
         switch (self.nodeType) {
             case NODE_TYPES.GENRE:
-                // HANDLE GENRE CLICK
+                // HANDLE GENRE
+                console.log("You clicked GENRE bitch.");
                 break;
             case NODE_TYPES.ARTIST:
-                // HANDLE ARTIST CLICK
+                // HANDLE ARTIST
+                console.log("You clicked ARTIST bitch.");
                 break;
             case NODE_TYPES.SONG:
-                // HANDLE SONG CLICK
+                // HANDLE SONG
+                console.log("You clicked SONG bitch.");
                 break;
             default:
                 // NEEDED?
+                console.log("Give me a Type!");
         }
     };
 
