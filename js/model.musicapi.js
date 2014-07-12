@@ -34,7 +34,6 @@ function loadTopArtists(genreName) {
 }
 
 function loadSimilarGenres(genreName) {
-    var url = host + 'genre/similar'
     $.getJSON(url, {api_key:apiKey, name:genreName },
         function(data) {
             var genres = data.response.genres;
