@@ -28,8 +28,8 @@ function loadGenre() {
             allGenres[genre.name] = genre;
             allGenres[genre.name] = genre;
            fullGenreList.push(genre);
-    }
-}
+    });
+});
 }
 
 function selectGenre(name) {
