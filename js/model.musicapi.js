@@ -19,18 +19,18 @@ function showGenre(genreName) {
     loadTopSongs(genreName, 'core-best');
 }
 
-function loadGenre() {
-    var url = "http://developer.echonest.com/api/v4/genre/list";
-    $.getJSON(url, {api_key:apiKey, results:2000, bucket:[]}, function(data) {
-                genreList = data.response.genres;
-            each(data.response.genres, function(genre, i) {
-            genre.which = i;
-            allGenres[genre.name] = genre;
-            allGenres[genre.name] = genre;
-           fullGenreList.push(genre);
-    });
-});
-}
+// function loadGenre() {
+//     $.getJSON({api_key:apiKey, results:2000, bucket:[]}, function(data) {
+//                 genreList = data.response.genres;
+//             $.each(data.response.genres, function(genre, i) {
+//             genre.which = i;
+//             allGenres[genre.name] = genre;
+//             allGenres[genre.name] = genre;
+//            fullGenreList.push(genre);
+//            console.log(genre);
+//     });
+// });
+// }
 
 function selectGenre(name) {
     $('#genre').val(name);
@@ -39,35 +39,33 @@ function selectGenre(name) {
 
 
 function loadTopArtists(genreName) {
-    $.getJSON(url, {api_key:apiKey, name:genreName },
+    var url = host + 'genre/artists'
+
+    $.getJSON(url, {api_key:apiKey,results:10,name:genreName},
         function(data) {
             var artists = data.response.artists;
-            each(artists, function(artist, i) {
-                var a = 'http://static.echonest.com/echotron/?id='+ artist.id;
-            });
+            console.log(artists);
+            // $.each(artists, function(artist, i) {
+            //     var a = 'http://static.echonest.com/echotron/?id='+ artist.id;
+            //     console.log(artist.id);
+
+            // });
         });
 }
 
 function loadSimilarGenres(genreName) {
+    var url = host + 'genre/similar'
     $.getJSON(url, {api_key:apiKey, name:genreName },
         function(data) {
             var genres = data.response.genres;
         });
+    $.each(genres, function(genre, i) {
+                    var a = $("<a>").text(genre.name).attr('href', '?genre='+genre.name);
+                    console.log(a);
+});
 }
 
-function loadTopSongs(genreName, preset) {
-    info("");
-    $.getJSON(url, {api_key:apiKey, bucket:['tracks', 'id:spotify-WW'],
-                    limit:true, type:"genre-radio",
-                    results:12,
-                    genre_preset:preset,
-                    genre:genreName },
-        function(data) {
-            var songs = data.response.songs;
-            curSongs = songs;
 
-        });
-}
 
 //// Spotify API ////
 
