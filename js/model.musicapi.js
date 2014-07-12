@@ -1,10 +1,12 @@
 function MusicAPI() {
     var self = this;
 
-    self.loadTopArtists = function(genreName, callback) {
-        var url = 'http://developer.echonest.com/api/v4/genre/artists'
+    self.getArtists = function(genreName, callback) {
+        var url = 'https://developer.echonest.com/api/v4/genre/artists'
         var apiKey = 'YTBBANYZHICTAFW2P';
-        $.getJSON(url, {api_key:apiKey,results:10,name:genreName},
+        var numberOfResults = 10;
+
+        $.getJSON(url, {api_key : apiKey, results : numberOfResults, name : genreName},
             function(data) {
                 var results = [];
                 for (var i = 0; i < data.response.artists.length; i++) {
