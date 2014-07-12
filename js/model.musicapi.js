@@ -17,7 +17,6 @@ function loadGenreList() {
            genreList = data.response.genres;
            allGenres[genre.name] = genre;
            fullGenreList.push(genre);
-        processParams();
     });
 }
 
@@ -39,7 +38,6 @@ function loadSimilarGenres(genreName) {
     $.getJSON(url, {api_key:apiKey, name:genreName },
         function(data) {
             var genres = data.response.genres;
-            list.empty();
         });
 }
 
