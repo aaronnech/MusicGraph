@@ -2,7 +2,7 @@ function Playlist(viewModel) {
     var self = this;
 
     self.viewModel = viewModel;
-    self.songs = ko.observableArray([]);
+    self.songs = new ko.observableArray([]);
 
     // ADD A SONG TO THE END OF THE PLAYLIST
     self.addSong = function(song) {
