@@ -18,7 +18,7 @@ function Playlist(state) {
     self.getTracks = function() {
         var results = [];
         for (var i = 0; i < self.songs().length; i++) {
-            results.push(self.songs()[i].track);
+            results.push(self.songs()[i].track.uri);
         }
         return results;
     };
