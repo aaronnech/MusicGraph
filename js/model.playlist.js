@@ -30,7 +30,7 @@ function Playlist() {
         if(self.playing) {
             self.currentSong(self.currentSong() + 1);
             if(self.currentSong() < self.songs().length) {
-                self.songs()[self.currentSong()].play(self.songEnded);
+                self.playSong(self.songs()[self.currentSong()]);x
             } else {
                 self.playing = false;
                 self.stopWaveform();
@@ -44,25 +44,53 @@ function Playlist() {
         }
     };
 
+    var PLAYER_ID = 'audio-player';
+    var PLAYER_ID_2 = 'audio-player-2';
+
     self.playSong = function(song) {
         if(self.songs().length > 0) {
             setSongsNotPlaying();
-            self.currentSong(self.songs.indexOf(song));
             self.playing = true;
+            self.currentSong(self.songs.indexOf(song));
             self.startWaveform();
-            self.songs()[self.currentSong()].play(self.songEnded);
+
+            var soundHandle = document.getElementById(PLAYER_ID);
+            var src = soundHandle.getAttribute("src");
+
+            var soundHandle2 = document.getElementById(PLAYER_ID_2);
+            var src2 = soundHandle2.getAttribute("src");
+
+            if (src == song.url) {
+                song.play(PLAYER_ID, self.songEnded);
+                self.prefetchSong(PLAYER_ID_2);
+            } else if (src2 == song.url) {
+                song.play(PLAYER_ID_2, self.songEnded);
+                self.prefetchSong(PLAYER_ID);
+            } else { // Not Loaded, use the first one
+                song.fetchSoundFile(PLAYER_ID, false);
+                song.play(PLAYER_ID, self.songEnded);
+                self.prefetchSong(PLAYER_ID_2);
+            }
+        }
+    };
+
+    self.prefetchSong = function(playerId) {
+        var length = self.songs().length;
+        if (length > 0 && self.currentSong() + 1 < length) {
+            var currentSongObject = self.songs()[self.currentSong() + 1];
+            currentSongObject.fetchSoundFile(playerId, false);
         }
     };
 
     self.stopWaveform = function() {
         $("#waveOne").attr("dur", "20s");
         $("#waveTwo").attr("dur", "25s");
-    }
+    };
 
     self.startWaveform = function() {
         $("#waveOne").attr("dur", "3s");
         $("#waveTwo").attr("dur", "5s");
-    }
+    };
 
     // RETURNS THE LENGTH OF THE PLAYLIST
     self.length = function() {
