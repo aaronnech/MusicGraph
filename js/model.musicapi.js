@@ -5,13 +5,15 @@ function MusicAPI() {
         var url = 'https://developer.echonest.com/api/v4/genre/artists'
         var apiKey = 'YTBBANYZHICTAFW2P';
         var numberOfResults = 10;
-        var reqQueue = new RequestQueue(numberOfResults, callback);
 
         $.getJSON(url, {api_key : apiKey, results : numberOfResults, name : genreName},
             function(data) {
                 var results = [];
+                var reqQueue = new RequestQueue(numberOfResults, function() {
+                    callback(results);
+                });
                 for (var i = 0; i < data.response.artists.length; i++) {
-                    self.searchArtist(data.response.artists[i].id, reqQueue.enqueue(function(artist) {
+                    self.searchArtist(data.response.artists[i].name, reqQueue.enqueue(function(artist) {
                         results.push(new Artist(artist));
                     }));
                 }
@@ -92,9 +94,9 @@ function RequestQueue(numberOfRequests, finished) {
 
     self.enqueue = function(callback) {
         return function(parameter) {
+            callback(parameter);
             self.done++;
             checkComplete();
-            callback(parameter);
         }
     };
 }
