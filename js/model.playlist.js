@@ -28,6 +28,7 @@ function Playlist() {
                 self.songs()[self.currentSong].play(self.songEnded);
             } else {
                 self.playing = false;
+                self.stopWaveform();
             }
         }
     };
@@ -35,10 +36,21 @@ function Playlist() {
     self.play = function() {
         if(self.songs().length > 0) {
             self.playing = true;
+            self.startWaveform();
             self.currentSong = 0;
             self.songs()[self.currentSong].play(self.songEnded);
         }
     };
+
+    self.stopWaveform = function() {
+        $("#waveOne").attr("dur", "0s");
+        $("#waveTwo").attr("dur", "0s");
+    }
+
+    self.startWaveform = function() {
+        $("#waveOne").attr("dur", "0s");
+        $("#waveTwo").attr("dur", "0s");
+    }
 
     // RETURNS THE LENGTH OF THE PLAYLIST
     self.length = function() {
