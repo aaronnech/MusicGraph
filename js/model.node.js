@@ -1,4 +1,4 @@
-function Node(viewModel, song, nodeType, x, y) {
+function Node(vm, song, nodeType, x, y) {
     var self = this;
 
     self.position = {
@@ -6,7 +6,7 @@ function Node(viewModel, song, nodeType, x, y) {
         y : ko.observable(y)
     };
 
-    self.viewModel = viewModel;
+    self.vm = vm;
     self.nodeType = nodeType;
     self.song = song;
 

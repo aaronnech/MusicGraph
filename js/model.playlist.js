@@ -1,7 +1,7 @@
-function Playlist(viewModel) {
+function Playlist(vm) {
     var self = this;
 
-    self.viewModel = viewModel;
+    self.vm = vm;
     self.songs = new ko.observableArray([]);
 
     // ADD A SONG TO THE END OF THE PLAYLIST
