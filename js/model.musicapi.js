@@ -1,7 +1,6 @@
-//Load Genere and top Artist relate to that
 jQuery.ajaxSettings.traditional = true;
 var host = 'http://developer.echonest.com/api/v4/';
-var apiKey =  'YTBBANYZHICTAFW2P';
+var apiKey = 'YTBBANYZHICTAFW2P';
 var knownSongs = {};
 var curGenre = null;
 var curSong = null;
@@ -70,29 +69,17 @@ function loadTopSongs(genreName, preset) {
         });
 }
 
-
-
-// SPOTIFY API CODE
-
-var getFirstArtist = function (query, callback) {
-    $.ajax({
-        url: 'https://api.spotify.com/v1/search',
-        data: {
-            q: query,
-            type: 'artist'
-        },
-        success: function (response) {
-            var item = response.artists.items[0];
-            callback(item.id, item.name);
-        }
-    });
-};
+//// Spotify API ////
 
 var getRelatedArtists = function (artistId, callback) {
     $.ajax({
         url: 'https://api.spotify.com/v1/artists/' + artistId + '/related-artists',
         success: function (response) {
-            callback(response);
+            var results = [];
+            for (var i = 0; i < response.artists.length; i++) {
+                results.push(new Artist(response.artists[i]));
+            }
+            callback(results);
         }
     });
 };
@@ -101,16 +88,21 @@ var getIndividualArtist = function (artistId, callback) {
     $.ajax({
         url: 'https://api.spotify.com/v1/artists/' + artistId,
         success: function (response) {
-            callback(response);
+            var result = new Artist(response);
+            callback(result);
         }
     });
 };
 
-var getArtistTopTracks  = function (artistId, callback) {
+var getArtistTopTracks = function (artistId, callback) {
     $.ajax({
         url: 'https://api.spotify.com/v1/artists/' + artistId + '/top-tracks?country=US',
         success: function (response) {
-            callback(response);
+            var results = [];
+            for (var i = 0; i < response.tracks.length; i++) {
+                results.push(new Song(response.tracks[i]));
+            }
+            callback(results);
         }
     });
 };

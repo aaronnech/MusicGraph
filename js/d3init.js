@@ -1,9 +1,15 @@
 var width = 800;
 var height = 600;
 
+d3.selection.prototype.moveToFront = function() {
+  return this.each(function(){
+    this.parentNode.appendChild(this);
+  });
+};
+
 var force = d3.layout.force()
     .charge(-120)
-    .linkDistance(100)
+    .linkDistance(200)
     .size([width, height])
 
 var svg = d3.select("#interactive-pane").append("svg")
@@ -27,7 +33,8 @@ var updateD3 = function(json) {
 	  .data(json.nodes, function(d) { return d.id(); });
 	node.enter().append("circle")
 	  .attr("class", "node")
-	  .attr("r", 100)
+	  .attr("r", 30)
+	  .moveToFront()
 	  .call(force.drag);
 	node.exit().remove();
 
@@ -46,6 +53,19 @@ var updateD3 = function(json) {
 	});
 
 	node.on('click', vm.clickNode);
+	node.on('mouseover', function(d) {
+		link.style('stroke', function(l) {
+			if (d === l.source || d === l.target)
+				return '#ecf0f1';
+			else
+				return '#e67e22';
+		});
+		vm.nodeMouseOver(d);
+	});
+	node.on('mouseout', function(d) {
+		link.style('stroke', '#e67e22');
+		vm.nodeMouseOut(d);
+	});
 
 }
 
