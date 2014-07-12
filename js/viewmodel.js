@@ -21,9 +21,12 @@ function AppViewModel() {
 	};
 
 	var makeSongs = function(node, songs) {
+		self.edges.removeAll();
+		self.nodes.removeAll();
 		var nodes = songs.map(function(song) {
 			return new Node(self, song, NODE_TYPES.SONG);
 		});
+		self.addNode(node);
 		nodes.forEach(function(songNode) {
 			self.addEdge(new Edge(node, songNode));
 			self.addNode(songNode);
