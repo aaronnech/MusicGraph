@@ -8,8 +8,8 @@ d3.selection.prototype.moveToFront = function() {
 };
 
 var force = d3.layout.force()
-    .charge(-350)
-    .linkDistance(200)
+    .charge(-500)
+    .linkDistance(250)
     .size([width, height]);
 
 var svg = d3.select("#interactive-pane").append("svg")
