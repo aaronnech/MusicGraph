@@ -67,6 +67,8 @@ function Playlist() {
             var soundHandle2 = document.getElementById(PLAYER_ID_2);
             var src2 = soundHandle2.getAttribute("src");
 
+            soundHandle.pause();
+            soundHandle2.pause();
             if (src == song.url) {
                 song.play(PLAYER_ID, self.songEnded);
                 self.prefetchSong(PLAYER_ID_2);
