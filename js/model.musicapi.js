@@ -13,7 +13,7 @@ var player;
 
 function loadGenreList() {
     var url = "http://developer.echonest.com/api/v4/genre/list";
-    $.getJSON(url, {api_key:apiKey, results:2000, bucket:["description", "urls"]}, function(data) {
+    $.getJSON(url, {api_key:apiKey, results:2000, bucket:[]}, function(data) {
            genreList = data.response.genres;
            allGenres[genre.name] = genre;
            fullGenreList.push(genre);
