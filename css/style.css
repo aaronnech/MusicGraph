@@ -34,12 +34,12 @@ body {
 	display: none;
 }
 
-circle.node {
+/*circle.node {
 	fill: #e67e22;
-}
+}*/
 
 circle.node:hover {
-	fill: #ecf0f1;
+	fill: #2a2c2b;
 }
 
 text {
@@ -61,6 +61,18 @@ rect.activated {
 line.link {
 	stroke-width: 3px;
 	stroke: #e67e22;
+}
+
+.genreNode {
+	fill: #ecf0f1;
+}
+
+.artistNode {
+	fill: #3498db;
+}
+
+.songNode {
+	fill: #e67e22;
 }
 
 .waveform {

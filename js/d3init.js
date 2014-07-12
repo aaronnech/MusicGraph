@@ -40,8 +40,22 @@ var updateD3 = function(json) {
 
 	// Add one circle in each group
 	var node = enteredGNode.insert("circle")
-	  .attr("class", "node")
-	  .attr("r", 30);
+	  .attr("class", function(d) {
+        var resultClass;
+        switch (d.nodeType) {
+            case NODE_TYPES.GENRE:
+                resultClass = "genreNode";
+                break;
+            case NODE_TYPES.ARTIST:
+                resultClass = "artistNode";
+                break;
+            case NODE_TYPES.SONG:
+                resultClass = "songNode";
+                break;
+        }
+        return "node " + resultClass;
+        })
+	.attr("r", 30);
 
 	var text = enteredGNode.insert('text')
       .attr("dx", ".10em")
