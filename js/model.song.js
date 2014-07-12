@@ -22,7 +22,7 @@ function Song(track) {
 		soundHandle.setAttribute('src', self.url);
 		if(loop)
 			soundHandle.setAttribute('loop', loop);
-	}
+	};
 
 	var self = this;
 
