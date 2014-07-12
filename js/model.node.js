@@ -1,10 +1,10 @@
 var nodeCounter = 0;
 
-function Node(vm, dataString, nodeType, x, y) {
+function Node(vm, dataString, nodeType) {
     var self = this;
 
-    self.x = x;
-    self.y = y;
+    self.x = 0;
+    self.y = 0;
 
     self.vm = vm;
     self.weight = 1;
