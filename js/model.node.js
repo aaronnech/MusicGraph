@@ -1,4 +1,4 @@
-function Node(viewModel, song, nodeType) {
+function Node(viewModel, song, nodeType, x, y) {
     var self = this;
 
     self.position = {
@@ -7,18 +7,18 @@ function Node(viewModel, song, nodeType) {
     };
 
     self.viewModel = viewModel;
-    self.nodeType = type;
+    self.nodeType = nodeType;
     self.song = song;
 
     self.onClick = function() {
         switch (self.nodeType) {
-            case NODE_TYPE.GENRE:
+            case NODE_TYPES.GENRE:
                 // HANDLE GENRE CLICK
                 break;
-            case NODE_TYPE.ARTIST:
+            case NODE_TYPES.ARTIST:
                 // HANDLE ARTIST CLICK
                 break;
-            case NODE_TYPE.SONG:
+            case NODE_TYPES.SONG:
                 // HANDLE SONG CLICK
                 break;
             default:
@@ -27,7 +27,7 @@ function Node(viewModel, song, nodeType) {
     };
 }
 
-var NODE_TYPE = {
+var NODE_TYPES = {
     GENRE : 0,
     ARTIST : 1,
     SONG : 2
