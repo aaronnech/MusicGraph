@@ -38,13 +38,15 @@ function Song(track) {
 	 */
 	self.fetchSoundFile = function(id, loop) {
 		soundHandle = document.getElementById(id);
-		soundHandle.setAttribute('src', '');
-		var newSoundHandle = soundHandle.cloneNode(true);
-		soundHandle.parentNode.replaceChild(newSoundHandle, soundHandle);
-		soundHandle = newSoundHandle;
-		soundHandle.setAttribute('src', self.url);
-		if(loop)
-			soundHandle.setAttribute('loop', loop);
+		if(soundHandle.getAttribute('src') != self.url) {
+			soundHandle.setAttribute('src', '');
+			var newSoundHandle = soundHandle.cloneNode(true);
+			soundHandle.parentNode.replaceChild(newSoundHandle, soundHandle);
+			soundHandle = newSoundHandle;
+			soundHandle.setAttribute('src', self.url);
+			if(loop)
+				soundHandle.setAttribute('loop', loop);
+		}
 	};
 
 
