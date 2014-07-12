@@ -1,6 +1,6 @@
-function Edge(source, dest) {
+function Edge(source, target) {
     var self = this;
 
     self.source = source;
-    self.dest = dest;
+    self.target = target;
 };
