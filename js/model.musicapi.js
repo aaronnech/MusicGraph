@@ -27,7 +27,7 @@ function loadTopArtists(genreName) {
     $.getJSON(url, {api_key:apiKey, name:genreName },
         function(data) {
             var artists = data.response.artists;
-            for (data in each(artists, function(artist, i)) {
+            each(artists, function(artist, i) {
                 var a = 'http://static.echonest.com/echotron/?id='+ artist.id;
             });
         });
