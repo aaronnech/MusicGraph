@@ -59,3 +59,17 @@ function MusicAPI() {
         });
     };
 };
+
+var searchArtist = function (query, callback) {
+    $.ajax({
+        url: 'https://api.spotify.com/v1/search',
+        data: {
+            q: query,
+            type: 'artist'
+        },
+        success: function (response) {
+            var item = response.artists.items[0];
+            callback(item.id, item.name);
+        }
+    });
+};
