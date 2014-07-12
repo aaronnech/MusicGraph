@@ -13,7 +13,7 @@ function Node(vm, song, nodeType, x, y) {
     self.id = new ko.observable('node-' + nodeCounter++);
 
     // HANDLES CLICK EVENTS ON THIS NODE
-    self.onClick = function() {
+    self.onClick = function(callback) {
         switch (self.nodeType) {
             case NODE_TYPES.GENRE:
                 // HANDLE GENRE
@@ -31,6 +31,7 @@ function Node(vm, song, nodeType, x, y) {
                 // NEEDED?
                 console.log("Give me a Type!");
         }
+        // callback(self, {RESULT});
     };
 
     self.toD3 = ko.computed(function() {
