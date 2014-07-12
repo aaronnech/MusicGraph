@@ -37,8 +37,8 @@
 		<div id="app">
 			<audio id="audio-player"></audio>
 			<div id="playlist">
-				<img src="img/logo.png" id="logo" />
-				<h2>Playlist</h2>
+				<img id="imageIcon" src="img/logo.png" id="logo" />
+				<h2 id="playlistTitle">Playlist</h2>
 				<ul class="playlist-list" data-bind="foreach: playList.songs">
 					<li><span class="song-name" data-bind="text: name"></span><a class="x-button" href="#" data-bind="click: $root.deletePlaylistSong">X</a></li>
 				</ul>

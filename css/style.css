@@ -10,9 +10,18 @@ body {
 	width: 100%;
 }
 
+#imageIcon {
+	margin-top: 2%;
+	margin-left: 4%;
+}
+
 #playlist {
 	width: 20%;
 	float: left;
+}
+
+#playlistTitle {
+	margin-left: 36%;
 }
 
 #interactive-pane {
