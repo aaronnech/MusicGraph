@@ -10,10 +10,26 @@ function MusicAPI() {
             function(data) {
                 var results = [];
                 for (var i = 0; i < data.response.artists.length; i++) {
-                    results.push(new Artist(data.response.artists[i]));
+                    self.searchArtist(data.response.artists[i].name, function(artist) {
+                        // results.push(new Artist(artist));
+                        console.log(new Artist(artist));
+                    });
                 }
-                callback(results);
             });
+    };
+
+    self.searchArtist = function(query, callback) {
+        $.ajax({
+            url: 'https://api.spotify.com/v1/search',
+            data: {
+                q: query,
+                type: 'artist'
+            },
+            success: function(response) {
+                var item = response.artists.items[0];
+                callback(item);
+            }
+        });
     };
 
     // self.loadSimilarGenres = function(genreName) {
@@ -60,18 +76,4 @@ function MusicAPI() {
             }
         });
     };
-};
-
-var searchArtist = function (query, callback) {
-    $.ajax({
-        url: 'https://api.spotify.com/v1/search',
-        data: {
-            q: query,
-            type: 'artist'
-        },
-        success: function (response) {
-            var item = response.artists.items[0];
-            callback(item.id, item.name);
-        }
-    });
 };
