@@ -8,11 +8,6 @@ body {
 	width: 100%;
 }
 
-#buffer {
-	width: 100%;
-	height: 800px;
-}
-
 #playlist {
 	width: 33%;
 	float: left;
@@ -22,4 +17,13 @@ body {
 	width: 64%;
 	float: right;
 	height: 800px;
+}
+
+circle.node {
+	fill: #e67e22;
+}
+
+line.link {
+	stroke-width: 3px;
+	stroke: #e67e22;
 }

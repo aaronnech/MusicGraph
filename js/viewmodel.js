@@ -4,12 +4,27 @@ function AppViewModel() {
 	self.apiService = null;
 
 	self.nodes = new ko.observableArray([]);
+	self.edges = new ko.observableArray([]);
 
 	self.addNode = function(node) {
+		for (var i = 0; i < self.nodes().length; i++) {
+			self.edges.push(new Edge(node, self.nodes()[i]));
+		}
 		self.nodes.push(node);
 	};
 
-	self.clickNode = function(event) {
+	self.removeNode = function(node) {
+		var index = self.nodes().indexOf(node);
+		if(index > -1) {
+			self.nodes.splice(index, 1);
+		}
+	};
 
+	self.clickNode = function(node) {
+		node.onClick(self.expandPlayer);
+	};
+
+	self.expandPlayer = function(node, result) {
+		
 	};
 }
