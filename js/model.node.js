@@ -15,6 +15,7 @@ function Node(vm, song, nodeType, x, y) {
 
     // HANDLES CLICK EVENTS ON THIS NODE
     self.onClick = function() {
+        console.log("You clicked me bitch.")
         switch (self.nodeType) {
             case NODE_TYPES.GENRE:
                 // HANDLE GENRE CLICK
