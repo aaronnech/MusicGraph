@@ -3,10 +3,8 @@ var nodeCounter = 0;
 function Node(vm, song, nodeType, x, y) {
     var self = this;
 
-    self.position = {
-        x : new ko.observable(x),
-        y : new ko.observable(y)
-    };
+    self.x = new ko.observable(x);
+    self.y = new ko.observable(y);
 
     self.vm = vm;
     self.nodeType = nodeType;
@@ -36,8 +34,8 @@ function Node(vm, song, nodeType, x, y) {
 
     self.toD3 = ko.computed(function() {
         return {
-            x : self.position.x(),
-            y : self.position.y()
+            x : self.x(),
+            y : self.y()
         };
     });
 };
